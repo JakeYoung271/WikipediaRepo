@@ -36,7 +36,7 @@ struct QuestionAnswer: View, Identifiable {
                     Text(question.options[x])
                         .fontWeight( .regular)
                         .foregroundColor(Color.black)
-                        .font(.headline)
+                        .font(.custom("texgyretermes-regular",size:22))
                         .padding()
                     Text(question.complete&&question.correctIndex==x ? (x==question.selectedIndex ? "✓" : "x") : " ")
                         .foregroundColor(.black)

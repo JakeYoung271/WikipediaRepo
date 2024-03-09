@@ -30,7 +30,7 @@ class optionsWrapper: ObservableObject {
          else if mquestion.complete {
              mquestion.clicks+=0.2
          }
-        if mquestion.clicks > 2.5 {
+        if mquestion.clicks > 2 {
              mquestion.clicks -= 1.5
              if removeOption(){
                  timer.invalidate()

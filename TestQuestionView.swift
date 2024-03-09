@@ -19,9 +19,9 @@ struct testQuestionView: View {
                     .shadow(radius: 10)
                     .foregroundStyle(.white)
                 VStack {
-                    Text(question.question).font(.title)
+                    Text(question.question).font(.custom("texgyretermes-regular", size:30))
                     Divider()
-                    WikipediaThumbnail(urlStr: question.link)
+                    WikipediaThumbnail(question:question)
                     Spacer(minLength: 20)
                     Divider().foregroundColor(.black)
                     Spacer(minLength: 20)

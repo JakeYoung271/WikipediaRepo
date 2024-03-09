@@ -23,7 +23,7 @@ struct QuestionView: View {
                             Text(String(question.timeOnScreen))
                             Text(question.question).font(.title)
                             Divider()
-                            WikipediaThumbnail(urlStr: question.link)
+                            WikipediaThumbnail(question: question)
                             Spacer(minLength: 20)
                             Divider().foregroundColor(.black)
                             Spacer(minLength: 20)
@@ -41,20 +41,6 @@ struct QuestionView: View {
                     }
                 }
             }
-
-struct WikipediaThumbnail: View {
-    var urlStr : String
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius:20)
-                .strokeBorder(.white, lineWidth:  1)
-            .shadow(radius: 10)
-            WebView(url:urlStr)
-        }
-        .frame(minHeight:200)
-        
-    }
-}
 
 #Preview {
     QuestionView(question: example)

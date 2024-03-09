@@ -20,7 +20,8 @@ class Question: ObservableObject{
     @Published var complete: Bool
     @Published var timeOnScreen: Double
     @Published var clicks: Double
-
+    @Published var article : WebView
+    
     init(){
     id = 0
     link =  "https://en.wikipedia.org/wiki/Twitter"
@@ -33,6 +34,8 @@ class Question: ObservableObject{
     selectedIndex = 5
     complete = false
     timeOnScreen = 0.1
-        clicks = 0.0
+    clicks = 0.0
+    article = WebView(url:link)
     }
+    
 }
