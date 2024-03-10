@@ -14,30 +14,39 @@ struct testQuestionView: View {
     var timer = Timer()
     var body: some View {
             ZStack {
-                Rectangle()
-                    .cornerRadius(20)
-                    .shadow(radius: 10)
-                    .foregroundStyle(.white)
+                    Rectangle()
+                        .cornerRadius(20)
+                        .shadow(radius: 10)
+                        .foregroundStyle(.white)
+                NavigationView {
                 VStack {
-                    Text(question.question).font(.custom("texgyretermes-regular", size:30))
+                    NavigationLink(destination:WikipediaThumbnail(question:question)){
+                        WikipediaThumbnail(question:question)
+                        }
+                        .frame(minHeight:200)
+                        Divider().foregroundColor(.black)
+                        Spacer(minLength: 20)
+                    Text(question.question).font(.custom("texgyretermes-regular", size:25))
                     Divider()
-                    WikipediaThumbnail(question:question)
                     Spacer(minLength: 20)
-                    Divider().foregroundColor(.black)
-                    Spacer(minLength: 20)
-                    ForEach(items.optionsView){x in
-                        x
+                        ForEach(items.optionsView){x in
+                            x
+                        }
                     }
+                    .padding()
                 }
                 .padding()
+                .onAppear(){
+                    items.assignTimer()
             }
-            .padding()
-            .onAppear(){
-                items.assignTimer()
         }
+            .frame(width: 360, height:700)
     }
 }
 #Preview {
     testQuestionView(question: example, items: optionsWrapper(question:example))
 }
 
+//
+//
+//

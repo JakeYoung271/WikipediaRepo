@@ -11,8 +11,7 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             ForEach(1..<20){_ in
-                QuestionView(question: example)
-                Text("Big Sadge, app no worky")
+                testQuestionView(question: example, items: optionsWrapper(question:example))
             }
         }
         .padding()

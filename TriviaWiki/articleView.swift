@@ -14,7 +14,7 @@ struct WikipediaThumbnail: View {
             RoundedRectangle(cornerRadius:20)
                 .strokeBorder(.white, lineWidth:  1)
             .shadow(radius: 10)
-            question.article
+            WebView(url:question.link)
         }
         .frame(minHeight:200)
     }

@@ -20,7 +20,7 @@ class Question: ObservableObject{
     @Published var complete: Bool
     @Published var timeOnScreen: Double
     @Published var clicks: Double
-    @Published var article : WebView
+    var article : WebView
     
     init(){
     id = 0
