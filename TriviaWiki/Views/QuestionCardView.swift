@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct testQuestionView: View {
+struct QuestionCardView: View {
     @ObservedObject var question: Question
     @ObservedObject var items : optionsWrapper
     var timer = Timer()
@@ -44,7 +44,7 @@ struct testQuestionView: View {
     }
 }
 #Preview {
-    testQuestionView(question: example, items: optionsWrapper(question:example))
+    QuestionCardView(question: example, items: optionsWrapper(question:example))
 }
 
 //

@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftUI
+
+var example = Question()
+
 class Question: ObservableObject{
     let id: Int
     let link: String
