@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D55FB8762BA94BE9008D0107 /* QuestionDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */; };
 		D5614CA92B9CF8A3002D9EDE /* TimerTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5614CA82B9CF8A3002D9EDE /* TimerTestView.swift */; };
 		D5614CAB2B9D1BEE002D9EDE /* texgyretermes-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */; };
 		D5614CAE2B9D202B002D9EDE /* articleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5614CAD2B9D202B002D9EDE /* articleView.swift */; };
@@ -43,9 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDividerView.swift; sourceTree = "<group>"; };
 		D5614CA82B9CF8A3002D9EDE /* TimerTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTestView.swift; sourceTree = "<group>"; };
 		D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyretermes-regular.otf"; sourceTree = "<group>"; };
-		D5614CAC2B9D1C05002D9EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D5614CAC2B9D1C05002D9EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5614CAD2B9D202B002D9EDE /* articleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = articleView.swift; sourceTree = "<group>"; };
 		D57033D82B9BDEA500C9D836 /* TriviaWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriviaWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaWikiApp.swift; sourceTree = "<group>"; };
@@ -93,10 +95,6 @@
 		D57033CF2B9BDEA500C9D836 = {
 			isa = PBXGroup;
 			children = (
-				D570340F2B9C4B8100C9D836 /* TestAnswerOptionView.swift */,
-				D570340D2B9C464A00C9D836 /* TestQuestionView.swift */,
-				D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */,
-				D5614CA82B9CF8A3002D9EDE /* TimerTestView.swift */,
 				D57033DA2B9BDEA500C9D836 /* TriviaWiki */,
 				D57033EB2B9BDEA700C9D836 /* TriviaWikiTests */,
 				D57033F52B9BDEA700C9D836 /* TriviaWikiUITests */,
@@ -117,14 +115,19 @@
 		D57033DA2B9BDEA500C9D836 /* TriviaWiki */ = {
 			isa = PBXGroup;
 			children = (
-				D5614CAC2B9D1C05002D9EDE /* Info.plist */,
-				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
-				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
-				D57034052B9BDED500C9D836 /* WebBrowser.swift */,
-				D57034072B9BDF2500C9D836 /* QuestionView.swift */,
-				D5614CAD2B9D202B002D9EDE /* articleView.swift */,
+				D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */,
+				D570340F2B9C4B8100C9D836 /* TestAnswerOptionView.swift */,
+				D570340D2B9C464A00C9D836 /* TestQuestionView.swift */,
+				D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */,
+				D5614CA82B9CF8A3002D9EDE /* TimerTestView.swift */,
 				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
+				D5614CAD2B9D202B002D9EDE /* articleView.swift */,
+				D57034072B9BDF2500C9D836 /* QuestionView.swift */,
+				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
+				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
+				D57034052B9BDED500C9D836 /* WebBrowser.swift */,
 				D57034092B9BDF4500C9D836 /* QuestionModel.swift */,
+				D5614CAC2B9D1C05002D9EDE /* Info.plist */,
 				D57033DF2B9BDEA700C9D836 /* Assets.xcassets */,
 				D57033E12B9BDEA700C9D836 /* Preview Content */,
 			);
@@ -294,6 +297,7 @@
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */,
 				D57034062B9BDED500C9D836 /* WebBrowser.swift in Sources */,
+				D55FB8762BA94BE9008D0107 /* QuestionDividerView.swift in Sources */,
 				D570340A2B9BDF4500C9D836 /* QuestionModel.swift in Sources */,
 				D570340E2B9C464A00C9D836 /* TestQuestionView.swift in Sources */,
 				D5614CA92B9CF8A3002D9EDE /* TimerTestView.swift in Sources */,

@@ -11,10 +11,11 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             ForEach(1..<20){_ in
-                testQuestionView(question: example, items: optionsWrapper(question:example))
+                Divider()
+                QuestionDividerView(question: example, items: optionsWrapper(question:example))
+                    .frame(height:650)
             }
         }
-        .padding()
     }
 }
 
