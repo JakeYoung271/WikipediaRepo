@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var qList : DisplayList
     var body: some View {
         ScrollView {
-            ForEach(1..<20){_ in
+//            ForEach(1..<20){_ in
+//                Divider()
+//                QuestionDividerView(question: example, items: optionsWrapper(question:example))
+//                    .frame(height:650)
+//            }
+            ForEach(qList.qViews){x in
+                x.frame(minHeight : 650)
                 Divider()
-                QuestionDividerView(question: example, items: optionsWrapper(question:example))
-                    .frame(height:650)
+                    .frame(height:1)
+                    .overlay(.gray)
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(qList: DisplayList(l1:[example,example]))
 }

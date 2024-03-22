@@ -10,9 +10,10 @@ import SwiftUI
 import SwiftUI
 import Combine
 
-struct QuestionDividerView: View {
+struct QuestionDividerView: View, Identifiable {
     @ObservedObject var question: Question
     @ObservedObject var items : optionsWrapper
+    let id = UUID()
     var timer = Timer()
     var body: some View {
         ZStack {

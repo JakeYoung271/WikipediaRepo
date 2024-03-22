@@ -11,7 +11,7 @@ import SwiftUI
 struct TriviaWikiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(qList: DisplayList(l1:[example,example]))
         }
     }
 }
