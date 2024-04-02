@@ -23,6 +23,7 @@ class Question: ObservableObject{
     @Published var complete: Bool
     @Published var timeOnScreen: Double
     @Published var clicks: Double
+    var article : WebView
     
     init(){
     id = 0
@@ -37,21 +38,22 @@ class Question: ObservableObject{
     complete = false
     timeOnScreen = 0.1
     clicks = 0.0
+    article = WebView(url:link)
     }
-    init(id1:Int, topic:String, q: String, opts:[String], resps:[CGFloat], corr:Int, subj: String, diff: Double){
-        id = id1
+    init(id1: Int, topic: String, q: String, opts: [String], resps: [CGFloat], corr: Int, cat: String, diff: Double){
+    id = id1
         link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
-        question = q
-        options = opts
-        responseRates = resps
-        correctIndex = corr
-        subject = subj
-        difficulty = diff
-        selectedIndex = 5
-        complete = false
-        timeOnScreen = 0.1
-        clicks = 0.0
+    question = q
+    options = opts
+    responseRates = resps
+    correctIndex = corr
+    subject = cat
+    difficulty = diff
+    selectedIndex = 5
+    complete = false
+    timeOnScreen = 0.1
+    clicks = 0.0
+    article = WebView(url:link)
     }
-    
     
 }
