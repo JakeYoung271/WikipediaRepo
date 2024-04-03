@@ -18,12 +18,11 @@ class Question: ObservableObject{
     let responseRates: [CGFloat]
     let correctIndex: Int
     let subject: String
-    let difficulty: Double
+    let difficulty: Int
     @Published var selectedIndex: Int
     @Published var complete: Bool
     @Published var timeOnScreen: Double
     @Published var clicks: Double
-    var article : WebView
     
     init(){
     id = 0
@@ -33,14 +32,13 @@ class Question: ObservableObject{
     responseRates = [0.50,0.25,0.125,0.125]
     correctIndex = 1
     subject = "business"
-    difficulty = 0.5
+    difficulty = 1
     selectedIndex = 5
     complete = false
     timeOnScreen = 0.1
     clicks = 0.0
-    article = WebView(url:link)
     }
-    init(id1: Int, topic: String, q: String, opts: [String], resps: [CGFloat], corr: Int, cat: String, diff: Double){
+    init(id1: Int, topic: String, q: String, opts: [String], resps: [CGFloat], corr: Int, cat: String, diff: Int){
     id = id1
         link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
     question = q
@@ -53,7 +51,6 @@ class Question: ObservableObject{
     complete = false
     timeOnScreen = 0.1
     clicks = 0.0
-    article = WebView(url:link)
     }
     
 }

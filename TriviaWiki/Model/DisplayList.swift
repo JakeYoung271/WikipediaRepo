@@ -17,6 +17,10 @@ class DisplayList : ObservableObject {
             qViews.append(QuestionDividerView(question:x, items: optionsWrapper(question:x)))
         }
     }
+    init(){
+        questions = [Question]()
+        qViews = [QuestionDividerView]()
+    }
     func add(q: Question){
         questions.append(q)
         qViews.append(QuestionDividerView(question:q, items:optionsWrapper(question:q)))

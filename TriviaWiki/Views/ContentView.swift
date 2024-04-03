@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var handler: QuestionDatabase
     @ObservedObject var qList : DisplayList
     @State var buttonPressed = false
     var body: some View {
@@ -16,7 +17,8 @@ struct ContentView: View {
                 buttonPressed.toggle()
                 let qIndex = Int.random(in:0...279)
                 let newQuestion = Question()
-                qList.add(q:newQuestion)
+                handler.toDisplay.add(q:newQuestion)
+                Task{ await handler.fillList()}
             }){
                 Text(buttonPressed ? "false" : "true")
             }
@@ -26,7 +28,7 @@ struct ContentView: View {
     //                QuestionDividerView(question: example, items: optionsWrapper(question:example))
     //                    .frame(height:650)
     //            }
-                ForEach(qList.qViews){x in
+                ForEach(handler.toDisplay.qViews){x in
                     x.frame(minHeight : 650)
                     Divider()
                         .frame(height:1)
@@ -38,5 +40,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(qList: DisplayList(l1:[example,example]))
+    ContentView(handler: QuestionDatabase(),
+                qList: DisplayList(l1:[example,example]))
 }
