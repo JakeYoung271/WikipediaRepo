@@ -9,18 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var handler: QuestionDatabase
-    @ObservedObject var qList : DisplayList
+    //@ObservedObject var qList : DisplayList
     @State var buttonPressed = false
     var body: some View {
         VStack {
             Button(action: {
-                buttonPressed.toggle()
-                let qIndex = Int.random(in:0...279)
-                let newQuestion = Question()
-                handler.toDisplay.add(q:newQuestion)
-                Task{ await handler.fillList()}
+                print("button pressed")
+                print(buttonPressed)
+                if !buttonPressed {
+                    buttonPressed = true
+                    handler.testAdd()
+                    //handler.loadSome()
+                    Task{ await handler.fillList()}
+                }
             }){
-                Text(buttonPressed ? "false" : "true")
+                Text(handler.loaded ? "loaded" : "not loaded")
+            }
+            Button(action: {
+                handler.loadSome()
+                print("button hit")
+            }){
+                Text("view next Question")
             }
             ScrollView {
     //            ForEach(1..<20){_ in
@@ -28,7 +37,7 @@ struct ContentView: View {
     //                QuestionDividerView(question: example, items: optionsWrapper(question:example))
     //                    .frame(height:650)
     //            }
-                ForEach(handler.toDisplay.qViews){x in
+                ForEach(handler.qViews){x in
                     x.frame(minHeight : 650)
                     Divider()
                         .frame(height:1)
@@ -40,6 +49,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(handler: QuestionDatabase(),
-                qList: DisplayList(l1:[example,example]))
+    ContentView(handler: QuestionDatabase())
 }

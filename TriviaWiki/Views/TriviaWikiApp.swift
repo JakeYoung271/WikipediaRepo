@@ -22,7 +22,8 @@ struct TriviaWikiApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            ContentView(handler: QuestionDatabase(), qList: DisplayList(l1:[example,example]))
+            //ContentView(handler: QuestionDatabase(), qList: DisplayList(l1:[example,example]))
+            ContentView(handler: QuestionDatabase())
         }
     }
 }
