@@ -21,7 +21,7 @@ class QuestionDatabase: ObservableObject {
         loaded = false
     }
     func fillList()async{
-        var querie1 = await getAllQuestions()
+        let querie1 = await getAllQuestions()
         for q in querie1 {
             print("q's gotten")
             qs.append(q)
@@ -41,7 +41,7 @@ class QuestionDatabase: ObservableObject {
             print(qs.count)
             return
         }
-        qViews.append(QuestionDividerView(question:qs[index], items:optionsWrapper(question:qs[index])))
+        qViews.append(QuestionDividerView(q:qs[index]))
         index += 1
     }
 }

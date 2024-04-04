@@ -25,7 +25,10 @@ struct QuestionAnswer: View, Identifiable {
             
         }
         Button(action:{
+            
+            //turn off toggle to prevent multiple attempts
             question.complete.toggle()
+            
             question.selectedIndex = x
         }){
             ZStack {

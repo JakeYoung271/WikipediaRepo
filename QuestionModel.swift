@@ -21,7 +21,7 @@ class Question: ObservableObject{
     let difficulty: Int
     @Published var selectedIndex: Int
     @Published var complete: Bool
-    @Published var timeOnScreen: Double
+    //@Published var timeOnScreen: Double
     @Published var clicks: Double
     
     init(){
@@ -35,12 +35,12 @@ class Question: ObservableObject{
     difficulty = 1
     selectedIndex = 5
     complete = false
-    timeOnScreen = 0.1
+    //timeOnScreen = 0.1
     clicks = 0.0
     }
     init(id1: Int, topic: String, q: String, opts: [String], resps: [CGFloat], corr: Int, cat: String, diff: Int){
     id = id1
-        link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
+    link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
     question = q
     options = opts
     responseRates = resps
@@ -49,7 +49,7 @@ class Question: ObservableObject{
     difficulty = diff
     selectedIndex = 5
     complete = false
-    timeOnScreen = 0.1
+    //timeOnScreen = 0.1
     clicks = 0.0
     }
     

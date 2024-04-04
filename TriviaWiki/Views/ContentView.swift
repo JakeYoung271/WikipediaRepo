@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var handler: QuestionDatabase
-    //@ObservedObject var qList : DisplayList
+    
+    //for use in temporary button
     @State var buttonPressed = false
+    
     var body: some View {
         VStack {
+            //temporary button for figuring out loading
             Button(action: {
                 print("button pressed")
                 print(buttonPressed)
@@ -25,6 +28,8 @@ struct ContentView: View {
             }){
                 Text(handler.loaded ? "loaded" : "not loaded")
             }
+            //temporary loader
+            
             Button(action: {
                 handler.loadSome()
                 print("button hit")
@@ -32,11 +37,6 @@ struct ContentView: View {
                 Text("view next Question")
             }
             ScrollView {
-    //            ForEach(1..<20){_ in
-    //                Divider()
-    //                QuestionDividerView(question: example, items: optionsWrapper(question:example))
-    //                    .frame(height:650)
-    //            }
                 ForEach(handler.qViews){x in
                     x.frame(minHeight : 650)
                     Divider()

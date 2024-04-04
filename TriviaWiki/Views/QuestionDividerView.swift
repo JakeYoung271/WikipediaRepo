@@ -8,18 +8,24 @@
 import SwiftUI
 
 import SwiftUI
-import Combine
 
 struct QuestionDividerView: View, Identifiable {
     @ObservedObject var question: Question
     @ObservedObject var items : optionsWrapper
-    let id = UUID()
-    var timer = Timer()
+    let id: UUID
+    init(q:Question){
+        id = UUID()
+        question = q
+        items = optionsWrapper(question: q)
+    }
     var body: some View {
         ZStack {
             Rectangle()
                 .fill(.white)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+            
+            //return here to adjust handling of different text sizes and lengths
+            
             VStack {
                 Text(question.question).font(.custom("texgyretermes-regular", size:25))
                 Spacer(minLength: 20)
@@ -32,12 +38,11 @@ struct QuestionDividerView: View, Identifiable {
             }
             .padding()
             .onAppear(){
-                items.assignTimer()
         }
         }
     }
 }
 
 #Preview {
-    QuestionDividerView(question: example, items: optionsWrapper(question:example))
+    QuestionDividerView(q: example)
 }

@@ -31,7 +31,7 @@ class DisplayList : ObservableObject {
             return
         }
         print("got here")
-        qViews.append(QuestionDividerView(question:questions[next], items:optionsWrapper(question:questions[next])))
+        qViews.append(QuestionDividerView(q:questions[next]))
         next += 1
     }
 }

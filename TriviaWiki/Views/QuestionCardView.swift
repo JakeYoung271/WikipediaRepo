@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import Combine
+//import Combine
 
 struct QuestionCardView: View {
     @ObservedObject var question: Question
     @ObservedObject var items : optionsWrapper
-    var timer = Timer()
+//    var timer = Timer()
     var body: some View {
             ZStack {
                     Rectangle()
@@ -37,7 +37,7 @@ struct QuestionCardView: View {
                 }
                 .padding()
                 .onAppear(){
-                    items.assignTimer()
+//                    items.assignTimer()
             }
         }
             .frame(width: 360, height:700)
