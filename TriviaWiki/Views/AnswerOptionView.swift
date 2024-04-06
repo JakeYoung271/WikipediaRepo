@@ -65,3 +65,17 @@ struct QuestionAnswer: View, Identifiable {
         }
     }
 }
+
+class optionsWrapper: ObservableObject {
+    @ObservedObject var mquestion : Question
+    var optionsView: [QuestionAnswer]
+//    var timer : Timer
+    init(question:Question){
+//        timer = Timer()
+        mquestion = question
+        optionsView = []
+        for i in 0..<question.options.count{
+            optionsView.append(QuestionAnswer(question: question, x: i))
+        }
+    }
+}

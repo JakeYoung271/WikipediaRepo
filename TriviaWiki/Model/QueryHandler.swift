@@ -9,28 +9,37 @@ import Foundation
 import Firebase
 
 func getAllQuestions() async ->[Question]{
-    var result = [Question]()
-    let db = Firestore.firestore()
-    let qs = db.collection("questions")
-    
-    do {
-      let querySnapshot = try await qs.getDocuments()
-      for d in querySnapshot.documents {
-        print("\(d.documentID) => \(d.data())")
-        let ques = Question(id1: d["id"] as! Int,
-                            topic: d["topic"] as! String,
-                            q: d["question"] as! String,
-                            opts: d["answers"] as! [String],
-                            resps: [0.25, 0.25, 0.25, 0.25],
-                            corr: d["correct"] as! Int,
-                            cat: d["category"] as! String,
-                            diff: 1)
-          result.append(ques)
-      }
-    } catch {
-      print("Error getting documents: \(error)")
-    }
-    return result
+//    var result = [Question]()
+//    let db = Firestore.firestore()
+//    let qs = db.collection("questions")
+//    
+//    do {
+//      let querySnapshot = try await qs.getDocuments()
+//      for d in querySnapshot.documents {
+//        print("\(d.documentID) => \(d.data())")
+//        let ques = Question(id1: d["id"] as! Int,
+//                            topic: d["topic"] as! String,
+//                            q: d["question"] as! String,
+//                            opts: d["answers"] as! [String],
+//                            resps: [0.25, 0.25, 0.25, 0.25],
+//                            corr: d["correct"] as! Int,
+//                            cat: d["category"] as! String,
+//                            diff: 1)
+//          result.append(ques)
+//      }
+//    } catch {
+//      print("Error getting documents: \(error)")
+//    }
+//    return result
+    return [Question(id1: 9999,
+                     topic: "testQ",
+                     q: "Does this work?",
+                     opts: ["Yes it does", "No it doesnt", "All of the above", "NOne of the above"],
+                     resps: [1,2,3,4],
+                     corr: 2,
+                     cat: "Mathematics",
+                     diff: 1),
+                     Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question()]
 }
 
 //Question(id1: d["id"], topic: d["topic"], q: d["question"],opts: d["answers"], resps: [0.25,0.25,0.25,0.25],corr: d["correct"], cat: d["category"], diff: d["difficulty"])

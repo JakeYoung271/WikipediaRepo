@@ -12,7 +12,7 @@ class QuestionDatabase: ObservableObject {
     var qs: [Question]
     var index: Int
     @Published var qViews: [QuestionDividerView]
-    @Published var loaded: Bool
+    var loaded: Bool
     init(){
         index = 0
         qs = [Question]()
@@ -44,13 +44,9 @@ class QuestionDatabase: ObservableObject {
         qViews.append(QuestionDividerView(q:qs[index]))
         index += 1
     }
-}
-
-class categoryBucket {
-    let category: String
-    var questions: [Question]
-    init(cat: String){
-     category = cat
-     questions = [Question]()
+    func dumpTop(){
+        qViews.removeFirst()
     }
 }
+
+
