@@ -28,7 +28,6 @@ struct QuestionAnswer: View, Identifiable {
             
             //turn off toggle to prevent multiple attempts
             question.complete.toggle()
-            
             question.selectedIndex = x
         }){
             ZStack {

@@ -7,13 +7,23 @@
 
 import SwiftUI
 
+
+
+struct loadingView: View {
+    var body: some View {
+        Text("Questions are loading")
+            .font(.title)
+        Text("If this message is not going away, check your internet connection or go to your profile tab to report an issue")
+    }
+}
+
 struct ContentView: View {
     @ObservedObject var handler: qHandler
     let data : qDatabase
     //for use in temporary button
     @State var counter: Int
     
-    init(handler: QuestionDatabase){
+    init(){
         data = qDatabase()
         for i in 1...30{
             let quest = Question(id1: i, topic: "TestQ", q: "This is question \(i)", opts: ["1","2","3","4"], resps: [0,0,0,0], corr: 0, cat: "Mathematics", diff: 1)
@@ -35,8 +45,20 @@ struct ContentView: View {
                             .frame(height:1)
                             .overlay(.gray)
                     }
-                    
+                    loadingView()
+                        .padding()
+                        .onAppear{
+                            for i in 1...2{
+                                print("adding question \(counter)")
+                                handler.addQ(id:counter)
+                                counter += 1
+                            }
+                        }
+                        .onDisappear{
+                            print("loader disappeared")
+                        }
                 }
+                
             }
             Button(action: {
                 handler.addQ(id:counter)
@@ -50,5 +72,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(handler: QuestionDatabase())
+    ContentView()
 }

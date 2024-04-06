@@ -22,17 +22,16 @@ class Question: ObservableObject{
     let difficulty: Int
     @Published var selectedIndex: Int
     @Published var complete: Bool
-    //@Published var timeOnScreen: Double
     @Published var clicks: Double
     
     init(){
     id = 0
-    link =  "https://en.wikipedia.org/wiki/Twitter"
-    question = "Who is the current CEO of twitter?"
-    options = ["Donald Trump","Elon Musk", "Darth Vader", "Neil Gaiman"]
+    link =  "https://en.wikipedia.org/wiki/default"
+    question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
+    options = ["Cockroach","Fly", "Termite", "Beatle"]
     responseRates = [0.50,0.25,0.125,0.125]
     correctIndex = 1
-    subject = "business"
+    subject = "TestQuestion"
     difficulty = 1
     selectedIndex = 5
     complete = false
@@ -50,7 +49,6 @@ class Question: ObservableObject{
     difficulty = diff
     selectedIndex = 5
     complete = false
-    //timeOnScreen = 0.1
     clicks = 0.0
     responseNums = resps
         var total = 0.0
@@ -74,9 +72,7 @@ class qDatabase {
         questions = Dictionary<Int, Question>()
         seen = Dictionary<Int, Int>()
     }
-    func reloadSeen(){
-        //implement later to use stored file of seen documents
-    }
+
     func getQ(id:Int) ->Question {
         if let resultq = questions[id]{
             return resultq
