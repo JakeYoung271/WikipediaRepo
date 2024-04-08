@@ -7,39 +7,55 @@
 
 import Foundation
 import Firebase
+import FirebaseCore
 
-func getAllQuestions() async ->[Question]{
-//    var result = [Question]()
-//    let db = Firestore.firestore()
-//    let qs = db.collection("questions")
-//    
-//    do {
-//      let querySnapshot = try await qs.getDocuments()
-//      for d in querySnapshot.documents {
-//        print("\(d.documentID) => \(d.data())")
-//        let ques = Question(id1: d["id"] as! Int,
-//                            topic: d["topic"] as! String,
-//                            q: d["question"] as! String,
-//                            opts: d["answers"] as! [String],
-//                            resps: [0.25, 0.25, 0.25, 0.25],
-//                            corr: d["correct"] as! Int,
-//                            cat: d["category"] as! String,
-//                            diff: 1)
-//          result.append(ques)
-//      }
-//    } catch {
-//      print("Error getting documents: \(error)")
-//    }
-//    return result
-    return [Question(id1: 9999,
-                     topic: "testQ",
-                     q: "Does this work?",
-                     opts: ["Yes it does", "No it doesnt", "All of the above", "NOne of the above"],
-                     resps: [1,2,3,4],
-                     corr: 2,
-                     cat: "Mathematics",
-                     diff: 1),
-                     Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question(),Question()]
+
+class fbase {
+    static let pub = fbase()
+    private init(){
+        FirebaseApp.configure()
+    }
+    func getQsInArr(ids : [Int]) async -> [Question]{
+            var result = [Question]()
+            let db = Firestore.firestore()
+            let qs = db.collection("questions")
+        
+            do {
+                let querySnapshot = try await qs.whereField("id", in: ids).getDocuments()
+              for d in querySnapshot.documents {
+                print("\(d.documentID) => \(d.data())")
+                let ques = Question(id1: d["id"] as! Int,
+                                    topic: d["topic"] as! String,
+                                    q: d["question"] as! String,
+                                    opts: d["options"] as! [String],
+                                    resps: d["responses"] as! [Int],
+                                    corr: d["correct"] as! Int,
+                                    cat: d["category"] as! String,
+                                    diff: d["rating"] as! Int)
+                  result.append(ques)
+              }
+            } catch {
+              print("Error getting documents: \(error)")
+            }
+            return result
+    }
+    func getIDs(cat:String, rat: Int)async ->[(Int,Int)]{
+        //IMPLEMENT THIS FUNCTION
+        var result = [(Int,Int)]()
+        //return result
+        //INCORRECT IMPLEMENTATION:
+        var indices = Set<Int>()
+        for i in 0..<50{
+            let ind = Int.random(in:0...1600)
+            indices.insert(ind)
+        }
+        for i in indices{
+            result.append((i,Int.random(in:750...2000)))
+        }
+        return result
+    }
+    
+    func updateOnlineRating(q:Question) async {
+        //IMPLEMENT THIS FUNCTION
+    }
 }
-
-//Question(id1: d["id"], topic: d["topic"], q: d["question"],opts: d["answers"], resps: [0.25,0.25,0.25,0.25],corr: d["correct"], cat: d["category"], diff: d["difficulty"])

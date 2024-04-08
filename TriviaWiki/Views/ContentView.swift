@@ -19,18 +19,14 @@ struct loadingView: View {
 
 struct ContentView: View {
     @ObservedObject var handler: qHandler
-    let data : qDatabase
-    //for use in temporary button
     @State var counter: Int
     
     init(){
-        data = qDatabase()
-        for i in 1...30{
-            let quest = Question(id1: i, topic: "TestQ", q: "This is question \(i)", opts: ["1","2","3","4"], resps: [0,0,0,0], corr: 0, cat: "Mathematics", diff: 1)
-            data.addToQuestions(q: quest)
-        }
+//        for i in 1...30{
+//            let quest = Question(id1: i, topic: "TestQ", q: "This is question \(i)", opts: ["1","2","3","4"], resps: [0,0,0,0], corr: 0, cat: "Mathematics", diff: 1)
+//            qData.pub.addToQuestions(q: quest)
+//        }
         self.handler = qHandler()
-        //for use in temporary button
         counter = 1
     }
     
@@ -40,7 +36,7 @@ struct ContentView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(handler.displayIDs, id: \.self){x in
-                        QuestionDividerView(q: data.getQ(id: x))
+                        QuestionDividerView(q: qData.pub.getQ(id: x))
                         Divider()
                             .frame(height:1)
                             .overlay(.gray)
@@ -48,10 +44,12 @@ struct ContentView: View {
                     loadingView()
                         .padding()
                         .onAppear{
-                            for i in 1...2{
-                                print("adding question \(counter)")
-                                handler.addQ(id:counter)
-                                counter += 1
+                            print("in content view: adding question \(counter)")
+                            Task{
+                                await qRec.pub.setup()
+                                handler.addQ(id: qRec.pub.recommend())
+                                handler.addQ(id: qRec.pub.recommend())
+                                handler.addQ(id: qRec.pub.recommend())
                             }
                         }
                         .onDisappear{
@@ -60,17 +58,10 @@ struct ContentView: View {
                 }
                 
             }
-            Button(action: {
-                handler.addQ(id:counter)
-                counter += 1
-                print("loader")
-            }){
-                Text("addQuestion")
-            }
         }
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+ //   ContentView()
+//}

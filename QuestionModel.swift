@@ -39,6 +39,24 @@ class Question: ObservableObject{
     clicks = 0.0
     responseNums = [0,0,0,0]
     }
+    
+    init(id1 : Int){
+    id = id1
+    link =  "https://en.wikipedia.org/wiki/default"
+    question = "This is a test Question with ID: \(id1)"
+    options = ["Cockroach","Fly", "Termite", "Beatle"]
+    responseRates = [0.50,0.25,0.125,0.125]
+    correctIndex = 1
+    subject = "TestQuestion"
+    difficulty = 1
+    selectedIndex = 5
+    complete = false
+    //timeOnScreen = 0.1
+    clicks = 0.0
+    responseNums = [0,0,0,0]
+    }
+    
+    
     init(id1: Int, topic: String, q: String, opts: [String], resps: [Int], corr: Int, cat: String, diff: Int){
     id = id1
     link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
@@ -65,10 +83,11 @@ class Question: ObservableObject{
     
 }
 
-class qDatabase {
+class qData {
+    static let pub = qData()
     private var questions: Dictionary<Int, Question>
     private var seen: Dictionary<Int, Int>
-    init(){
+    private init(){
         questions = Dictionary<Int, Question>()
         seen = Dictionary<Int, Int>()
     }
@@ -100,28 +119,27 @@ class qDatabase {
         }
         questions[q.id] = q
     }
+    func loadIn(ids: [Int]) async {
+        print("ran LoadIn")
+        let result = await fbase.pub.getQsInArr(ids: ids)
+        for i in result{
+            print("added question \(i)")
+            qData.pub.addToQuestions(q: i)
+        }
+    }
     
 }
 
 class qHandler: ObservableObject {
     @Published var displayIDs : [Int]
-    var buckets: [categoryBucket]
+    //var buckets: [categoryBucket]
     //var data: qDatabase
     init(){
         displayIDs = [Int]()
-        buckets = [categoryBucket]()
+        //buckets = [categoryBucket]()
         //data = data1
     }
     func addQ(id:Int){
         displayIDs.append(id)
-    }
-}
-
-class categoryBucket {
-    let category: String
-    var questions: [Question]
-    init(cat: String){
-     category = cat
-     questions = [Question]()
     }
 }
