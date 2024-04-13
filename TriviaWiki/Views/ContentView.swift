@@ -18,16 +18,12 @@ struct loadingView: View {
 }
 
 struct ContentView: View {
-    @ObservedObject var handler: qHandler
+    @State var IDList : [Int]
     @State var counter: Int
     
     init(){
-//        for i in 1...30{
-//            let quest = Question(id1: i, topic: "TestQ", q: "This is question \(i)", opts: ["1","2","3","4"], resps: [0,0,0,0], corr: 0, cat: "Mathematics", diff: 1)
-//            qData.pub.addToQuestions(q: quest)
-//        }
-        self.handler = qHandler()
         counter = 1
+        IDList = [Int]()
     }
     
     
@@ -35,8 +31,8 @@ struct ContentView: View {
         VStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(handler.displayIDs, id: \.self){x in
-                        QuestionDividerView(q: qData.pub.getQ(id: x))
+                    ForEach(IDList, id: \.self){x in
+                        QuestionDividerView(q: Question(id1:x))
                         Divider()
                             .frame(height:1)
                             .overlay(.gray)
@@ -45,12 +41,9 @@ struct ContentView: View {
                         .padding()
                         .onAppear{
                             print("in content view: adding question \(counter)")
-                            Task{
-                                await qRec.pub.setup()
-                                handler.addQ(id: qRec.pub.recommend())
-                                handler.addQ(id: qRec.pub.recommend())
-                                handler.addQ(id: qRec.pub.recommend())
-                            }
+                                IDList.append(qRec.pub.recommend())
+                                IDList.append(qRec.pub.recommend())
+                                IDList.append(qRec.pub.recommend())
                         }
                         .onDisappear{
                             print("loader disappeared")
@@ -62,6 +55,6 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
- //   ContentView()
-//}
+#Preview {
+    ContentView()
+}

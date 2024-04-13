@@ -12,21 +12,27 @@ class qRec {
     let genCats = ["Science", "Humanities", "Arts and Culture"]
     var cIds : [[(Int,Int)]]
     var ratings: [Int]
-    var loadedIds : Set<Int>
-    var recommendations : [Int]
-    var listsFilled : Bool
+    var seen : Set<Int>
     
     private init() {
         //return to initialize ratings properly
-        ratings = [1200,1200,1200]
+        ratings = [1000,1000,1000]
         cIds = [[(Int,Int)](),[(Int,Int)](),[(Int,Int)]()]
-        loadedIds = Set<Int>()
-        recommendations = [Int]()
-        listsFilled = false
-    }
-    func setup() async {
+        seen = Set<Int>()
         setupLists()
-        await fillRecs()
+        setupSeen()
+    }
+    
+    func setupSeen(){
+        var arrSeen = CoreDataStack.shared.getHistory()
+        for i in arrSeen{
+            seen.insert(i[0])
+        }
+    }
+    
+    func seeProblem(id : Int, chosen : Int){
+        seen.insert(id)
+        CoreDataStack.shared.addHistory(toAdd: [id, chosen])
     }
     
     func generalCat(cat:String) ->Int{
@@ -39,8 +45,7 @@ class qRec {
         return -1
     }
     
-    func setupLists() {
-        if listsFilled { return }
+    private func setupLists() {
         for i in 0..<indicesByCat.count-1
         {
             var counter = indicesByCat[i].1
@@ -48,7 +53,8 @@ class qRec {
             print("beginning to parse indicesByCat")
             while counter < indicesByCat[i+1].1
             {
-                if qData.pub.getSeen(id:counter) == -1
+                //if qData.pub.getSeen(id:counter) == -1
+                if !seen.contains(counter)
                 {
                     cIds[index].append((counter,allRatings[counter]))
                 }
@@ -61,51 +67,91 @@ class qRec {
         cIds[1].sort(by: {$0.1 < $1.1})
         cIds[2].sort(by: {$0.1 < $1.1})
         print("lists filled and sorted!")
-        print(cIds[0][0])
-        print(cIds[0][100])
-        print(cIds[1][0])
-        listsFilled = true
+        print(cIds[0].count)
+        print(cIds[1].count)
+        print(cIds[2].count)
     }
     
-    func fillRecs() async {
-        print("running fill Recs")
-        if recommendations.count < 3
-        {
-            print("getting more questions")
-            var toLoad = [Int]()
-            for i in 0...9{
-                var rInd = Int.random(in:0...2)
-                if cIds[rInd].count==0
-                {
-                    print("in fillRecs() list of \(rInd) is empty!!!")
-                    rInd += 1
-                    rInd %= 3
-                }
-                if cIds[rInd].count==0
-                {
-                    print("in fillRecs() list of \(rInd) is empty!!!")
-                    rInd += 1
-                    rInd %= 3
-                }
-                if cIds[rInd].count==0
-                {
-                    print("All recommendations lists empty! Aur Naur, CLEO!")
-                }
-                toLoad.append(cIds[rInd][0].0)
-                recommendations.append(cIds[rInd][0].0)
-                cIds[rInd].remove(at: 0)
+    func getBestInCat(catIndex : Int) -> Int{
+        var result = -1
+        let rating = ratings[catIndex]
+        //basic binary search
+        var a = 0
+        var b = cIds[catIndex].count-1
+        var target = 0
+        var targetRating = ratings[catIndex]
+        while a < b{
+            //print("a is \(a) and b is \(b)")
+            target  = (a + b) / 2
+            var val =  cIds[catIndex][target].1
+            if val == targetRating {
+                a = b
             }
-            await qData.pub.loadIn(ids: toLoad)
+            else if val < targetRating {
+                a = target + 1
+            }
+            else {
+                b = target - 1
+            }
         }
-        print("finished fillRecs")
+        var maxScore = -10000
+        var maxIndex = 0
+        for i in 0...10{
+            var score = 0
+            var candInd = -5 + target + i
+            if candInd > 0 && candInd < cIds[catIndex].count {
+                score -= abs(targetRating - cIds[catIndex][candInd].1)
+                //sets a penalty for more played questions: preferentially recommends less seen questions
+                let timesPlayed = allResponses[cIds[catIndex][candInd].0].reduce(0, +)
+                if timesPlayed > 100{
+                    score -= 50
+                }
+                else if timesPlayed > 50{
+                    score -= 15
+                }
+                else if timesPlayed > 10 {
+                    score -= 5
+                }
+                score += Int.random(in: 0...50)
+                if score > maxScore{
+                    maxScore = score
+                    maxIndex = candInd
+                }
+            }
+        }
+        result = cIds[catIndex][maxIndex].0
+        cIds[catIndex].remove(at:maxIndex)
+        return result
     }
     
     func recommend() ->Int {
-        if recommendations.isEmpty{
+        var index = Int.random(in:0...2)
+        if cIds[index].count==0{
+            print("cIds of \(index) is empty!!!")
+            index += 1
+            index %= 3
+        }
+        if cIds[index].count==0{
+            print("cIds of \(index) is empty!!!")
+            index += 1
+            index %= 3
+        }
+        if cIds[index].count==0{
+            print("cIds of \(index) is empty!!!")
+            print("they're all empty, holy heck!!!")
             return -1
         }
-        var result = recommendations[0]
-        recommendations.remove(at: 0)
-        return result
+        return getBestInCat(catIndex: index)
+    }
+    
+    
+    //implement this function
+    func updateRating(){
+        //return here!!!
+    }
+    
+    //implement this function
+    func updateServer(){
+        //implement this function!!!
     }
 }

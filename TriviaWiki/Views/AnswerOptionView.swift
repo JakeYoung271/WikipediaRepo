@@ -39,13 +39,14 @@ struct QuestionAnswer: View, Identifiable {
                         .fontWeight( .regular)
                         .foregroundColor(Color.black)
                         .font(.custom("texgyretermes-regular",size:18))
+                        .multilineTextAlignment(.leading)
                         .padding()
                     Text(question.complete&&question.correctIndex==x ? (x==question.selectedIndex ? "✓" : "x") : " ")
                         .foregroundColor(.black)
                         .opacity(question.complete ? 1:0)
                         .fontWeight(.heavy)
                     Spacer()
-                    Text("\(Int(Float(question.responseRates[x])*1000)/10)%")
+                    Text("\(Int(getFillPercent()*1000)/10)%")
                         .padding()
                         .fontWeight(.regular)
                         .opacity(question.complete ? 0.7:0)
@@ -55,13 +56,27 @@ struct QuestionAnswer: View, Identifiable {
                     GeometryReader {geo in
                         RoundedRectangle(cornerRadius:20)
                             .fill(edgeColor)
-                            .frame(width:geo.size.width*question.responseRates[x], height:geo.size.height)
+                            .frame(width:geo.size.width*CGFloat(getFillPercent()), height:geo.size.height)
                             .opacity(question.complete ? 0.2 : 0.0)
                     }
                 }
             }
             .fixedSize(horizontal: false, vertical:true)
         }
+    }
+    func getFillPercent() -> Double{
+        var result : Double
+        var total = 0.0
+        for x in question.responseNums{
+            total += Double(x)
+        }
+        if total==0{
+            result = 0.25
+        }
+        else{
+            result = (Double(question.responseNums[self.x])) / total
+        }
+        return result
     }
 }
 

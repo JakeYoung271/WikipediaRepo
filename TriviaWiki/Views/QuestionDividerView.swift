@@ -28,8 +28,10 @@ struct QuestionDividerView: View, Identifiable {
             
             VStack {
                 Text(question.question).font(.custom("texgyretermes-regular", size:25))
+                    .multilineTextAlignment(.leading)
                 Spacer(minLength: 20)
-                WikipediaThumbnail(question:question)
+                //WikipediaThumbnail(question:question)
+                Text("This is a placeholder for a wiki Article")
                     .frame(minHeight:200)
                 Spacer(minLength: 20)
                 ForEach(items.optionsView){x in
