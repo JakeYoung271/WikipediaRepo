@@ -11,28 +11,29 @@ class qRec {
     static let pub = qRec()
     let genCats = ["Science", "Humanities", "Arts and Culture"]
     var cIds : [[(Int,Int)]]
-    var ratings: [Int]
+    //var ratings: [Int]
+    //var numSeen : [Int]
     var seen : Set<Int>
     
     private init() {
-        //return to initialize ratings properly
-        ratings = [1000,1000,1000]
         cIds = [[(Int,Int)](),[(Int,Int)](),[(Int,Int)]()]
         seen = Set<Int>()
-        setupLists()
         setupSeen()
+        setupLists()
     }
     
     func setupSeen(){
-        var arrSeen = CoreDataStack.shared.getHistory()
+        var arrSeen = CoreDataStack.shared.mSeen!.allSeen!
         for i in arrSeen{
-            seen.insert(i[0])
+            seen.insert(i)
         }
     }
     
-    func seeProblem(id : Int, chosen : Int){
-        seen.insert(id)
-        CoreDataStack.shared.addHistory(toAdd: [id, chosen])
+    func seeProblem(q : Question){
+        seen.insert(q.id)
+        CoreDataStack.shared.mSeen!.allSeen!.append(q.id)
+        CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
+        CoreDataStack.shared.updateRating(q:q)
     }
     
     func generalCat(cat:String) ->Int{
@@ -74,12 +75,11 @@ class qRec {
     
     func getBestInCat(catIndex : Int) -> Int{
         var result = -1
-        let rating = ratings[catIndex]
+        let targetRating = CoreDataStack.shared.mSeen!.ratings![catIndex]
         //basic binary search
         var a = 0
         var b = cIds[catIndex].count-1
         var target = 0
-        var targetRating = ratings[catIndex]
         while a < b{
             //print("a is \(a) and b is \(b)")
             target  = (a + b) / 2
@@ -146,12 +146,12 @@ class qRec {
     
     
     //implement this function
-    func updateRating(){
-        //return here!!!
-    }
     
     //implement this function
     func updateServer(){
         //implement this function!!!
     }
+    
+
+    
 }

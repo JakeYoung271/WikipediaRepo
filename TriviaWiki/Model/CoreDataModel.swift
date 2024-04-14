@@ -33,21 +33,27 @@ class CoreDataStack: ObservableObject {
     
     private init() {
         loadDump0()
-        initSeen()
+        initSeenList()
     }
     
-    func initSeen() {
+    func initSeenList() {
         let fr = SeenList.fetchRequest()
+        print("got here in initSeen 1")
         do {
+            print("got here in initSeen 2")
             let fetchResult = try persistentContainer.viewContext.fetch(fr)
+            print("got here in initSeen 3")
             if fetchResult.count==1{
                 print("got MSeen Instance, woohoo!")
                 mSeen = fetchResult[0]
             }
             else if fetchResult.count == 0 {
+                print("trying to Save")
                 var toSave = SeenList(context: persistentContainer.viewContext)
                 print("savedNew seen")
-                toSave.allSeen = [[Int]]()
+                toSave.allSeen = [Int]()
+                toSave.ratings = [1000,1000,1000]
+                toSave.numSeen = [0,0,0]
                 mSeen = toSave
                 do {
                     try persistentContainer.viewContext.save()
@@ -57,40 +63,50 @@ class CoreDataStack: ObservableObject {
                 }
             }
             else {
-                print("HOLY HECK TWO MANY SEEN LISTS")
+                print("holy heck too many lists: \(fetchResult.count)")
+                //return here to dump too many seenFiles and restore history from website
             }
         }
         catch {
             print("failed to get SeenList because errors \(error)")
+            //hopefully this never runs!!!
+            var toSave = SeenList(context: persistentContainer.viewContext)
+            print("savedNew seen")
+            toSave.allSeen = [Int]()
+            toSave.ratings = [1000,1000,1000]
+            toSave.numSeen = [0,0,0]
+            mSeen = toSave
         }
     }
     
-    func getHistory() -> [[Int]]{
-        var result = [[Int]]()
-        if let unwrapped = mSeen {
-            return unwrapped.allSeen!
-        }
-        return result
-    }
-    
-    func addHistory(toAdd : [Int]){
-        if let unwrappedSeen = mSeen {
-            (unwrappedSeen.allSeen!).append(toAdd)
-            do {
-                try persistentContainer.viewContext.save()
-            }
-            catch {
-                print("failed to save in addHistory due to \(error)")
-            }
-        }
-        else {
-            print("no history object to write too!")
-        }
-    }
-    
-    
-    func getCount(){
+//    func getHistory() -> [[Int]]{
+//        var result = [[Int]]()
+//        if let unwrapped = mSeen {
+//            return unwrapped.allSeen!
+//        }
+//        return result
+//    }
+//    
+//    func addHistory(toAdd : [Int]){
+//        mSeen.allSeen.append(toAdd)
+//    }
+    func getRatingChange(playerRating : Int, questionRating : Int, performance: Int, K:Int) ->Int
+    {
+        var denom = 1.0 + pow(10, Double(questionRating - playerRating) / 400.0)
+        var expectedVal = 1.0 / denom
+        var diff = Double(performance) - expectedVal
+        var scaledDiff = Double(K) * diff
         
+        return Int(round(scaledDiff))
+    }
+    
+    func updateRating(q:Question){
+        var index = qRec.pub.generalCat(cat: q.subject)
+        var delta = getRatingChange(playerRating: mSeen!.ratings![index],
+                                    questionRating: allRatings[q.id],
+                                    performance: q.selectedIndex == q.correctIndex ? 1 : 0,
+                                    K: mSeen!.numSeen![index] > 25 ? 16 : Int(800.0 / Double(1 + 2*mSeen!.numSeen![index])))
+        mSeen!.ratings![index] += delta
     }
     
     func readJSONFile(forName name: String) -> [String : Any]?{
