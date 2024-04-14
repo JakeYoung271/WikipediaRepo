@@ -25,13 +25,13 @@ class qRec {
     func setupSeen(){
         var arrSeen = CoreDataStack.shared.mSeen!.allSeen!
         for i in arrSeen{
-            seen.insert(i)
+            seen.insert(i[0])
         }
     }
     
     func seeProblem(q : Question){
         seen.insert(q.id)
-        CoreDataStack.shared.mSeen!.allSeen!.append(q.id)
+        CoreDataStack.shared.mSeen!.allSeen!.append([q.id,q.selectedIndex])
         CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
         CoreDataStack.shared.updateRating(q:q)
     }

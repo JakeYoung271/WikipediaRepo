@@ -37,12 +37,11 @@ class CoreDataStack: ObservableObject {
     }
     
     func initSeenList() {
-        let fr = SeenList.fetchRequest()
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "SeenList") as! NSFetchRequest<SeenList>
         print("got here in initSeen 1")
         do {
             print("got here in initSeen 2")
             let fetchResult = try persistentContainer.viewContext.fetch(fr)
-            print("got here in initSeen 3")
             if fetchResult.count==1{
                 print("got MSeen Instance, woohoo!")
                 mSeen = fetchResult[0]
@@ -51,7 +50,7 @@ class CoreDataStack: ObservableObject {
                 print("trying to Save")
                 var toSave = SeenList(context: persistentContainer.viewContext)
                 print("savedNew seen")
-                toSave.allSeen = [Int]()
+                toSave.allSeen = [[Int]]()
                 toSave.ratings = [1000,1000,1000]
                 toSave.numSeen = [0,0,0]
                 mSeen = toSave
@@ -72,7 +71,7 @@ class CoreDataStack: ObservableObject {
             //hopefully this never runs!!!
             var toSave = SeenList(context: persistentContainer.viewContext)
             print("savedNew seen")
-            toSave.allSeen = [Int]()
+            toSave.allSeen = [[Int]]()
             toSave.ratings = [1000,1000,1000]
             toSave.numSeen = [0,0,0]
             mSeen = toSave
