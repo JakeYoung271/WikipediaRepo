@@ -27,8 +27,12 @@ struct QuestionAnswer: View, Identifiable {
         Button(action:{
             
             //turn off toggle to prevent multiple attempts
-            question.complete.toggle()
-            question.selectedIndex = x
+            
+            if question.complete == false {
+                question.complete = true
+                question.selectedIndex = x
+                qRec.pub.seeProblem(q: question)
+            }
         }){
             ZStack {
                 RoundedRectangle(cornerRadius:20)

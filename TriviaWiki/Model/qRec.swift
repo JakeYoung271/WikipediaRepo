@@ -7,7 +7,7 @@
 
 import Foundation
 
-class qRec {
+class qRec : ObservableObject {
     static let pub = qRec()
     let genCats = ["Science", "Humanities", "Arts and Culture"]
     var cIds : [[(Int,Int)]]
@@ -24,16 +24,22 @@ class qRec {
     
     func setupSeen(){
         var arrSeen = CoreDataStack.shared.mSeen!.allSeen!
+        print("seen problems are:")
         for i in arrSeen{
             seen.insert(i[0])
+            print(String(describing:i), terminator : " ")
         }
     }
     
     func seeProblem(q : Question){
+        print("seeing problem : id: \(q.id), question : \(q.question)")
+        print("my ratings are \(String(describing: CoreDataStack.shared.mSeen!.ratings))")
         seen.insert(q.id)
+        CoreDataStack.shared.updateRating(q:q)
         CoreDataStack.shared.mSeen!.allSeen!.append([q.id,q.selectedIndex])
         CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
-        CoreDataStack.shared.updateRating(q:q)
+        CoreDataStack.shared.trySave()
+        Task { await fbase.pub.updateActivityLog()}
     }
     
     func generalCat(cat:String) ->Int{

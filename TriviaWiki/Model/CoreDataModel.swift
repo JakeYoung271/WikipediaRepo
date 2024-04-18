@@ -48,7 +48,7 @@ class CoreDataStack: ObservableObject {
             }
             else if fetchResult.count == 0 {
                 print("trying to Save")
-                var toSave = SeenList(context: persistentContainer.viewContext)
+                let toSave = SeenList(context: persistentContainer.viewContext)
                 print("savedNew seen")
                 toSave.allSeen = [[Int]]()
                 toSave.ratings = [1000,1000,1000]
@@ -69,12 +69,21 @@ class CoreDataStack: ObservableObject {
         catch {
             print("failed to get SeenList because errors \(error)")
             //hopefully this never runs!!!
-            var toSave = SeenList(context: persistentContainer.viewContext)
+            let toSave = SeenList(context: persistentContainer.viewContext)
             print("savedNew seen")
             toSave.allSeen = [[Int]]()
             toSave.ratings = [1000,1000,1000]
             toSave.numSeen = [0,0,0]
             mSeen = toSave
+        }
+    }
+    
+    func trySave(){
+        do {
+            try persistentContainer.viewContext.save()
+        }
+        catch{
+            print("failed to save in trySave due to \(error)")
         }
     }
     
@@ -91,17 +100,18 @@ class CoreDataStack: ObservableObject {
 //    }
     func getRatingChange(playerRating : Int, questionRating : Int, performance: Int, K:Int) ->Int
     {
-        var denom = 1.0 + pow(10, Double(questionRating - playerRating) / 400.0)
-        var expectedVal = 1.0 / denom
-        var diff = Double(performance) - expectedVal
-        var scaledDiff = Double(K) * diff
-        
+        print("calculating rating change with these params : pRating : \(playerRating), qRating : \(questionRating), performance : \(performance), K : \(K)")
+        let denom = 1.0 + pow(10, Double(questionRating - playerRating) / 400.0)
+        let expectedVal = 1.0 / denom
+        let diff = Double(performance) - expectedVal
+        let scaledDiff = Double(K) * diff
+        print("result is \(round(scaledDiff))")
         return Int(round(scaledDiff))
     }
     
     func updateRating(q:Question){
-        var index = qRec.pub.generalCat(cat: q.subject)
-        var delta = getRatingChange(playerRating: mSeen!.ratings![index],
+        let index = qRec.pub.generalCat(cat: q.subject)
+        let delta = getRatingChange(playerRating: mSeen!.ratings![index],
                                     questionRating: allRatings[q.id],
                                     performance: q.selectedIndex == q.correctIndex ? 1 : 0,
                                     K: mSeen!.numSeen![index] > 25 ? 16 : Int(800.0 / Double(1 + 2*mSeen!.numSeen![index])))
@@ -162,7 +172,7 @@ class CoreDataStack: ObservableObject {
     func fetchID(id: Int) -> [QStatic]{
         do{
             let fr = QStatic.fetchRequest()
-            fr.predicate = NSPredicate(format: "id == \(id)")
+            fr.predicate = NSPredicate(format: "id = \(id)")
             let returnVal = try persistentContainer.viewContext.fetch(fr)
             return returnVal
         }
