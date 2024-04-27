@@ -16,13 +16,13 @@ struct QuestionDividerView: View, Identifiable {
     init(q:Question){
         id = UUID()
         question = q
-        items = optionsWrapper(question: q)
+        items = optionsWrapper(question: q, inert : false)
     }
     var body: some View {
         ZStack {
             Rectangle()
                 .fill(.white)
-                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                .cornerRadius(20)
             
             //return here to adjust handling of different text sizes and lengths
             
@@ -30,8 +30,8 @@ struct QuestionDividerView: View, Identifiable {
                 Text(question.question).font(.custom("texgyretermes-regular", size:25))
                     .multilineTextAlignment(.leading)
                 Spacer(minLength: 20)
-                //WikipediaThumbnail(question:question)
-                Text("This is a placeholder for a wiki Article")
+                WikipediaThumbnail(question:question)
+                //Text("This is a placeholder for a wiki Article")
                     .frame(minHeight:200)
                 Spacer(minLength: 20)
                 ForEach(items.optionsView){x in

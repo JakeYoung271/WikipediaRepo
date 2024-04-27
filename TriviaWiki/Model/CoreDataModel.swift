@@ -14,7 +14,7 @@ class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
     var mSeen : SeenList?
     var maxQuestionId = 1602
-    // Create a persistent container as a lazy variable to defer instantiation until its first use.
+
     lazy var persistentContainer: NSPersistentContainer = {
         
         // Pass the data model filename to the container’s initializer.
@@ -87,17 +87,6 @@ class CoreDataStack: ObservableObject {
         }
     }
     
-//    func getHistory() -> [[Int]]{
-//        var result = [[Int]]()
-//        if let unwrapped = mSeen {
-//            return unwrapped.allSeen!
-//        }
-//        return result
-//    }
-//    
-//    func addHistory(toAdd : [Int]){
-//        mSeen.allSeen.append(toAdd)
-//    }
     func getRatingChange(playerRating : Int, questionRating : Int, performance: Int, K:Int) ->Int
     {
         print("calculating rating change with these params : pRating : \(playerRating), qRating : \(questionRating), performance : \(performance), K : \(K)")

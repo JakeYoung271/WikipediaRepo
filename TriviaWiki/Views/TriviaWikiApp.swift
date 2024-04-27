@@ -25,7 +25,6 @@ struct TriviaWikiApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //ContentView(handler: QuestionDatabase(), qList: DisplayList(l1:[example,example]))
             ContentView()
         }
     }

@@ -11,6 +11,7 @@ struct QuestionAnswer: View, Identifiable {
     @ObservedObject var question: Question
     var x: Int
     let id = UUID()
+    let inert : Bool
     var body: some View {
         var edgeColor = Color(.gray)
         if !question.complete {
@@ -25,13 +26,17 @@ struct QuestionAnswer: View, Identifiable {
             
         }
         Button(action:{
-            
-            //turn off toggle to prevent multiple attempts
-            
-            if question.complete == false {
-                question.complete = true
+            if inert {
+                question.complete.toggle()
                 question.selectedIndex = x
-                qRec.pub.seeProblem(q: question)
+            }
+            else {
+                if question.complete == false {
+                    question.complete = true
+                    question.selectedIndex = x
+                    qRec.pub.seeProblem(q: question)
+                    QuestionHistoryManager.pub.addQuestion(q: question)
+                }
             }
         }){
             ZStack {
@@ -87,13 +92,15 @@ struct QuestionAnswer: View, Identifiable {
 class optionsWrapper: ObservableObject {
     @ObservedObject var mquestion : Question
     var optionsView: [QuestionAnswer]
+    var inert : Bool
 //    var timer : Timer
-    init(question:Question){
+    init(question:Question, inert: Bool){
 //        timer = Timer()
         mquestion = question
         optionsView = []
+        self.inert = inert
         for i in 0..<question.options.count{
-            optionsView.append(QuestionAnswer(question: question, x: i))
+            optionsView.append(QuestionAnswer(question: question, x: i, inert: self.inert))
         }
     }
 }

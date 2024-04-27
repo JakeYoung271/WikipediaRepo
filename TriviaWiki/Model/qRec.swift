@@ -8,22 +8,32 @@
 import Foundation
 
 class qRec : ObservableObject {
+    
     static let pub = qRec()
     let genCats = ["Science", "Humanities", "Arts and Culture"]
     var cIds : [[(Int,Int)]]
-    //var ratings: [Int]
-    //var numSeen : [Int]
+    var mode : String
     var seen : Set<Int>
     
     private init() {
         cIds = [[(Int,Int)](),[(Int,Int)](),[(Int,Int)]()]
         seen = Set<Int>()
+        mode = "Random"
         setupSeen()
         setupLists()
     }
     
+    func updateMode(newMode : String) -> Bool {
+        if newMode != mode {
+            mode = newMode
+            print("ran mode updator")
+            return true
+        }
+        return false
+    }
+
     func setupSeen(){
-        var arrSeen = CoreDataStack.shared.mSeen!.allSeen!
+        let arrSeen = CoreDataStack.shared.mSeen!.allSeen!
         print("seen problems are:")
         for i in arrSeen{
             seen.insert(i[0])
@@ -89,7 +99,7 @@ class qRec : ObservableObject {
         while a < b{
             //print("a is \(a) and b is \(b)")
             target  = (a + b) / 2
-            var val =  cIds[catIndex][target].1
+            let val =  cIds[catIndex][target].1
             if val == targetRating {
                 a = b
             }
@@ -104,7 +114,7 @@ class qRec : ObservableObject {
         var maxIndex = 0
         for i in 0...10{
             var score = 0
-            var candInd = -5 + target + i
+            let candInd = -5 + target + i
             if candInd > 0 && candInd < cIds[catIndex].count {
                 score -= abs(targetRating - cIds[catIndex][candInd].1)
                 //sets a penalty for more played questions: preferentially recommends less seen questions
@@ -131,33 +141,42 @@ class qRec : ObservableObject {
     }
     
     func recommend() ->Int {
-        var index = Int.random(in:0...2)
-        if cIds[index].count==0{
-            print("cIds of \(index) is empty!!!")
-            index += 1
-            index %= 3
+        if mode=="Random" {
+            var index = Int.random(in:0...2)
+            if cIds[index].count==0{
+                print("cIds of \(index) is empty!!!")
+                index += 1
+                index %= 3
+            }
+            if cIds[index].count==0{
+                print("cIds of \(index) is empty!!!")
+                index += 1
+                index %= 3
+            }
+            if cIds[index].count==0{
+                print("cIds of \(index) is empty!!!")
+                print("they're all empty, holy heck!!!")
+                return -1
+            }
+            return getBestInCat(catIndex: index)
         }
-        if cIds[index].count==0{
-            print("cIds of \(index) is empty!!!")
-            index += 1
-            index %= 3
+        else {
+            var index : Int
+            switch (mode){
+            case "Science":
+                index = 0
+            case "Humanities":
+                index = 1
+            case "Arts and Culture":
+                index = 2
+            default:
+                index = -1
+            }
+            if cIds[index].count==0{
+                print("cIds of \(index) is empty!!!")
+                return -1
+            }
+            return getBestInCat(catIndex: index)
         }
-        if cIds[index].count==0{
-            print("cIds of \(index) is empty!!!")
-            print("they're all empty, holy heck!!!")
-            return -1
-        }
-        return getBestInCat(catIndex: index)
     }
-    
-    
-    //implement this function
-    
-    //implement this function
-    func updateServer(){
-        //implement this function!!!
-    }
-    
-
-    
 }

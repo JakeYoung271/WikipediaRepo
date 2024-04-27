@@ -10,12 +10,18 @@ import SwiftUI
 
 var example = Question()
 
-class Question: ObservableObject{
+class Question: ObservableObject, Hashable {
+    static func == (lhs: Question, rhs: Question) -> Bool {
+        ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    func hash(into hasher: inout Hasher){
+        hasher.combine(ObjectIdentifier(self))
+    }
+    
     let id: Int
     let link: String
     let question: String
     let options: [String]
- //   let responseRates: [CGFloat]
     let responseNums: [Int]
     let correctIndex: Int
     let subject: String
@@ -29,7 +35,6 @@ class Question: ObservableObject{
     link =  "https://en.wikipedia.org/wiki/default"
     question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
     options = ["Cockroach","Fly", "Termite", "Beatle"]
-//    responseRates = [0.50,0.25,0.125,0.125]
     correctIndex = 1
     subject = "TestQuestion"
     difficulty = 1
@@ -92,70 +97,6 @@ class Question: ObservableObject{
     complete = false
     clicks = 0.0
     responseNums = resps
-//        var total = 0.0
-//    for x in resps{
-//        total += Double(x)
-//        }
-//    if total==0{
-//        responseRates = [0.25,0.25,0.25,0.25]
-//        }
-//    else{
-//        responseRates = resps.map {x in  CGFloat((Double(x)) / total)}
-//        }
     }
     
 }
-
-//class qData {
-//    static let pub = qData()
-//    private var questions: Dictionary<Int, Question>
-//    private var seen: Dictionary<Int, Int>
-//    private init(){
-//        questions = Dictionary<Int, Question>()
-//        seen = Dictionary<Int, Int>()
-//    }
-//
-//    func getQ(id:Int) ->Question {
-//        if let resultq = questions[id]{
-//            return resultq
-//        }
-//        print("failed to get question with id \(id)")
-//        return Question()
-//    }
-//    func qContains(id:Int) -> Bool {
-//        //return false
-//        return questions[id] != nil
-//    }
-//    func getSeen(id:Int) ->Int {
-//        if let chosen = seen[id]{
-//            return chosen
-//        }
-//        return -1
-//    }
-//    func addToSeen(q:Question){
-//        if let chosen = seen[q.id]{
-//            print("Question with title \(q.question) already in seen")
-//            return
-//        }
-//        seen[q.id] = q.selectedIndex
-//    }
-//    func addToQuestions(q:Question){
-//        if let found = questions[q.id]{
-//            print("attempted to add question: \(q.question) which was already in dictionary of Questions")
-//            return
-//        }
-//        questions[q.id] = q
-//    }
-//    func loadIn(ids: [Int]) async {
-//        print("ran LoadIn")
-//        //let result = await fbase.pub.getQsInArr(ids: ids)
-//        for i in result{
-//            print("added question \(i)")
-//            qData.pub.addToQuestions(q: i)
-//        }
-////        for i in ids{
-////            qData.pub.addToQuestions(q: Question(id1:i))
-////        }
-//    }
-//    
-//}
