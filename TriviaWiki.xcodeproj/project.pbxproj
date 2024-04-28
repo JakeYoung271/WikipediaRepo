@@ -51,6 +51,7 @@
 		D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */; };
 		D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */; };
 		D5CA9ED82BC35926006EE2D3 /* HardCodedVals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */; };
+		D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHandler.swift; sourceTree = "<group>"; };
 		D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qRec.swift; sourceTree = "<group>"; };
 		D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardCodedVals.swift; sourceTree = "<group>"; };
+		D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiThumbnailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
 				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
 				D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */,
+				D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */,
 				D570340D2B9C464A00C9D836 /* QuestionCardView.swift */,
 				D5BD8D592BBC999E00D83117 /* WebBrowser.swift */,
 			);
@@ -399,6 +402,7 @@
 				D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */,
 				D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */,
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
+				D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */,
 				D5B700EF2BC74F6E00BD552C /* CoreDataModel.swift in Sources */,
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D5B700ED2BC74E5500BD552C /* QuestionDatabase.xcdatamodeld in Sources */,

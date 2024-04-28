@@ -30,9 +30,11 @@ struct QuestionDividerView: View, Identifiable {
                 Text(question.question).font(.custom("texgyretermes-regular", size:25))
                     .multilineTextAlignment(.leading)
                 Spacer(minLength: 20)
-                WikipediaThumbnail(question:question)
-                //Text("This is a placeholder for a wiki Article")
-                    .frame(minHeight:200)
+                //Divider()
+                NavigationLink(destination: WikipediaThumbnail(question:question)) {
+                    WikiThumbnailView(subject: question.topic)
+                }
+                //Divider()
                 Spacer(minLength: 20)
                 ForEach(items.optionsView){x in
                     x

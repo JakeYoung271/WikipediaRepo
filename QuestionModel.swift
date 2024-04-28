@@ -26,6 +26,7 @@ class Question: ObservableObject, Hashable {
     let correctIndex: Int
     let subject: String
     let difficulty: Int
+    let topic : String
     @Published var selectedIndex: Int
     @Published var complete: Bool
     @Published var clicks: Double
@@ -43,9 +44,25 @@ class Question: ObservableObject, Hashable {
     //timeOnScreen = 0.1
     clicks = 0.0
     responseNums = [0,0,0,0]
+    topic = "default"
     }
     
     init(id1 : Int){
+    if let cQuest = QuestionHistoryManager.pub.IDCache[id1]{
+        id = id1
+        link = cQuest.link
+        question = cQuest.question
+        options = cQuest.options
+        correctIndex = cQuest.correctIndex
+        subject = cQuest.subject
+        difficulty = cQuest.difficulty
+        selectedIndex = cQuest.selectedIndex
+        complete = cQuest.complete
+        clicks = cQuest.clicks
+        responseNums = cQuest.responseNums
+        topic = cQuest.topic
+        return
+    }
     let sResult = CoreDataStack.shared.fetchID(id:id1)
     if sResult.count != 1 {
         for i in sResult{
@@ -66,6 +83,7 @@ class Question: ObservableObject, Hashable {
         //timeOnScreen = 0.1
         clicks = 0.0
         responseNums = [0,0,0,0]
+        topic = "default"
 
     }
     else{
@@ -81,6 +99,7 @@ class Question: ObservableObject, Hashable {
         complete = false
         clicks = 0.0
         responseNums = allResponses[id1]
+        topic = Qbody.topic!
         }
     }
     
@@ -97,6 +116,7 @@ class Question: ObservableObject, Hashable {
     complete = false
     clicks = 0.0
     responseNums = resps
+    self.topic = topic
     }
     
 }

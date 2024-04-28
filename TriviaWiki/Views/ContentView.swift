@@ -96,7 +96,7 @@ struct topBarView: View {
 }
 
 struct TopicMenu: View {
-    @State private var selection = "random"
+    @State private var selection = "Random"
     let topics = ["Arts and Culture", "Science", "Humanities", "Random"]
     var body: some View{
         VStack{
@@ -120,11 +120,14 @@ struct TopicMenu: View {
 class QuestionHistoryManager: ObservableObject{
     static var pub = QuestionHistoryManager()
     @Published var questionsList : [Question]
+    var IDCache : [Int : Question]
     private init(){
         questionsList = [Question]()
+        IDCache = [Int : Question]()
     }
     func addQuestion(q : Question){
         questionsList.insert(q, at:0)
+        IDCache[q.id] = q
     }
 }
 
