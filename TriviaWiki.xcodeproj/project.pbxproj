@@ -52,6 +52,9 @@
 		D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */; };
 		D5CA9ED82BC35926006EE2D3 /* HardCodedVals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */; };
 		D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */; };
+		D5E044A92BDEC0AE00A49CE0 /* SymbolViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */; };
+		D5E044AC2BDED2F800A49CE0 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = D5E044AB2BDED2F800A49CE0 /* Popovers */; };
+		D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +101,8 @@
 		D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qRec.swift; sourceTree = "<group>"; };
 		D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardCodedVals.swift; sourceTree = "<group>"; };
 		D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiThumbnailView.swift; sourceTree = "<group>"; };
+		D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViews.swift; sourceTree = "<group>"; };
+		D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +116,7 @@
 				D5ACFDF52BBBC9E40055C8D3 /* FirebaseStorageCombine-Community in Frameworks */,
 				D5ACFDF12BBBC9E40055C8D3 /* FirebaseRemoteConfigSwift in Frameworks */,
 				D5ACFDCD2BBBC9E40055C8D3 /* FirebaseAnalyticsSwift in Frameworks */,
+				D5E044AC2BDED2F800A49CE0 /* Popovers in Frameworks */,
 				D5ACFDC92BBBC9E40055C8D3 /* FirebaseAnalytics in Frameworks */,
 				D5ACFDCB2BBBC9E40055C8D3 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				D5ACFDE52BBBC9E40055C8D3 /* FirebaseFirestoreSwift in Frameworks */,
@@ -226,7 +232,9 @@
 			children = (
 				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
 				D5614CAD2B9D202B002D9EDE /* articleView.swift */,
+				D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */,
 				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
+				D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */,
 				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
 				D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */,
 				D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */,
@@ -276,6 +284,7 @@
 				D5ACFDF02BBBC9E40055C8D3 /* FirebaseRemoteConfigSwift */,
 				D5ACFDF22BBBC9E40055C8D3 /* FirebaseStorage */,
 				D5ACFDF42BBBC9E40055C8D3 /* FirebaseStorageCombine-Community */,
+				D5E044AB2BDED2F800A49CE0 /* Popovers */,
 			);
 			productName = TriviaWiki;
 			productReference = D57033D82B9BDEA500C9D836 /* TriviaWiki.app */;
@@ -351,6 +360,7 @@
 			mainGroup = D57033CF2B9BDEA500C9D836;
 			packageReferences = (
 				D5ACFDC72BBBC9E40055C8D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D5E044AA2BDED2F800A49CE0 /* XCRemoteSwiftPackageReference "Popovers" */,
 			);
 			productRefGroup = D57033D92B9BDEA500C9D836 /* Products */;
 			projectDirPath = "";
@@ -402,12 +412,14 @@
 				D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */,
 				D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */,
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
+				D5E044A92BDEC0AE00A49CE0 /* SymbolViews.swift in Sources */,
 				D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */,
 				D5B700EF2BC74F6E00BD552C /* CoreDataModel.swift in Sources */,
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D5B700ED2BC74E5500BD552C /* QuestionDatabase.xcdatamodeld in Sources */,
 				D5CA9ED82BC35926006EE2D3 /* HardCodedVals.swift in Sources */,
 				D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */,
+				D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */,
 				D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */,
 				D55FB8762BA94BE9008D0107 /* QuestionDividerView.swift in Sources */,
 				D570340E2B9C464A00C9D836 /* QuestionCardView.swift in Sources */,
@@ -754,6 +766,14 @@
 				minimumVersion = 10.23.1;
 			};
 		};
+		D5E044AA2BDED2F800A49CE0 /* XCRemoteSwiftPackageReference "Popovers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/Popovers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +891,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5ACFDC72BBBC9E40055C8D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		D5E044AB2BDED2F800A49CE0 /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5E044AA2BDED2F800A49CE0 /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
 		};
 /* End XCSwiftPackageProductDependency section */
 

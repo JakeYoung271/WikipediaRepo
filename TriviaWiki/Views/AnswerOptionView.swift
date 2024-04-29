@@ -50,16 +50,18 @@ struct QuestionAnswer: View, Identifiable {
                         .font(.custom("texgyretermes-regular",size:18))
                         .multilineTextAlignment(.leading)
                         .padding()
-                    Text(question.complete&&question.correctIndex==x ? (x==question.selectedIndex ? "✓" : "x") : " ")
-                        .foregroundColor(.black)
-                        .opacity(question.complete ? 1:0)
-                        .fontWeight(.heavy)
+                    if question.complete&&question.correctIndex==x{
+                        Text("✓")
+                            .foregroundColor(.black)
+                            .fontWeight(.heavy)}
                     Spacer()
-                    Text("\(Int(getFillPercent()*1000)/10)%")
-                        .padding()
-                        .fontWeight(.regular)
-                        .opacity(question.complete ? 0.7:0)
-                        .foregroundColor(.black)
+                    if question.complete{
+                        Text("\(Int(getFillPercent()*1000)/10)%")
+                            .padding()
+                            .fontWeight(.regular)
+                            .opacity(0.7)
+                            .foregroundColor(.black)
+                    }
                 }
                 .overlay() {
                     GeometryReader {geo in

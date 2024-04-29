@@ -14,9 +14,19 @@ import UIKit
 class fbase {
     let TIME_OFFSET = 1713426675.0
     static let pub = fbase()
+    var liked = [Int]()
+    var disliked = [Int]()
     private init(){
     }
-
+    func addResponse(id: Int, likedQ: Bool){
+        if likedQ {
+            liked.append(id)
+        }
+        else {
+            disliked.append(id)
+        }
+    }
+    
     func updateActivityLog() async {
         print("updateActivity log called")
         let entriesCount = CoreDataStack.shared.mSeen!.allSeen!.count
@@ -38,7 +48,9 @@ class fbase {
         let data : [String : Any] = ["timestamp" : Int(NSDate().timeIntervalSince1970 - TIME_OFFSET),
                                      "ids"  : qIDS,
                                      "responses" : resps,
-                                     "ratings" : CoreDataStack.shared.mSeen!.ratings!]
+                                     "ratings" : CoreDataStack.shared.mSeen!.ratings!,
+                                     "likedIDs" : liked,
+                                     "dislikedIDs": disliked]
         let dataChunk : [String : Any] = [String(data["timestamp"] as! Int) : data]
         do {
             try await db.setData(dataChunk, merge: true)
@@ -47,12 +59,20 @@ class fbase {
             print("failed to upload log because of \(error)")
         }
         print("updateActivityLog finished =)")
+        liked = []
+        disliked = []
     }
     
     //implement this!!
     func updateHardCodedVals(){
         
     }
+    
+    //implement this function!
+    func reportQuestion(id: Int, report: String){
+        
+    }
+    
     //implement this!!!
     func updateQuestionDatabase(){
         

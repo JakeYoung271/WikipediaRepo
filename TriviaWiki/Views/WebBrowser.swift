@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-var mylink = "https://www.google.com"
+var mylink = "//ttps://www.google.com"
 
 struct WebView: UIViewRepresentable {
  

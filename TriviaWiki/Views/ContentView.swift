@@ -82,7 +82,7 @@ struct topBarView: View {
                             Spacer()
                             TopicMenu()
                             Spacer()
-                            NavigationLink(destination: HistList()) { Text("history")
+                            NavigationLink(destination: HistList()) { Text("History")
                             }
                             Spacer()
 
