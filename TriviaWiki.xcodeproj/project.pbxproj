@@ -19,6 +19,9 @@
 		D57033F92B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033F82B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift */; };
 		D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */; };
 		D570340E2B9C464A00C9D836 /* QuestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D570340D2B9C464A00C9D836 /* QuestionCardView.swift */; };
+		D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */; };
+		D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */; };
+		D5A7C9B92C059810000A2C52 /* WikipediaFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */; };
 		D5ACFDC52BBBC7FD0055C8D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */; };
 		D5ACFDC92BBBC9E40055C8D3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDC82BBBC9E40055C8D3 /* FirebaseAnalytics */; };
 		D5ACFDCB2BBBC9E40055C8D3 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDCA2BBBC9E40055C8D3 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -52,7 +55,6 @@
 		D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */; };
 		D5CA9ED82BC35926006EE2D3 /* HardCodedVals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */; };
 		D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */; };
-		D5E044A92BDEC0AE00A49CE0 /* SymbolViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */; };
 		D5E044AC2BDED2F800A49CE0 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = D5E044AB2BDED2F800A49CE0 /* Popovers */; };
 		D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +93,9 @@
 		D57033F82B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaWikiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerOptionView.swift; sourceTree = "<group>"; };
 		D570340D2B9C464A00C9D836 /* QuestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCardView.swift; sourceTree = "<group>"; };
+		D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBottomMenuView.swift; sourceTree = "<group>"; };
+		D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticleThumbnailView.swift; sourceTree = "<group>"; };
+		D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WikipediaFrame.png; sourceTree = "<group>"; };
 		D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B700EC2BC74E5500BD552C /* QuestionDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuestionDatabase.xcdatamodel; sourceTree = "<group>"; };
 		D5B700EE2BC74F6E00BD552C /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
@@ -101,7 +106,6 @@
 		D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qRec.swift; sourceTree = "<group>"; };
 		D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardCodedVals.swift; sourceTree = "<group>"; };
 		D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiThumbnailView.swift; sourceTree = "<group>"; };
-		D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViews.swift; sourceTree = "<group>"; };
 		D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,16 +234,18 @@
 		D59AC6A92BAA2F2900E3CD0E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */,
 				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
 				D5614CAD2B9D202B002D9EDE /* articleView.swift */,
-				D5E044A82BDEC0AE00A49CE0 /* SymbolViews.swift */,
 				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
 				D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */,
 				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
 				D55FB8752BA94BE9008D0107 /* QuestionDividerView.swift */,
+				D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */,
 				D5E044A62BDE29AC00A49CE0 /* WikiThumbnailView.swift */,
 				D570340D2B9C464A00C9D836 /* QuestionCardView.swift */,
 				D5BD8D592BBC999E00D83117 /* WebBrowser.swift */,
+				D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 				D5ACFDC52BBBC7FD0055C8D3 /* GoogleService-Info.plist in Resources */,
 				D57033E02B9BDEA700C9D836 /* Assets.xcassets in Resources */,
 				D5614CAB2B9D1BEE002D9EDE /* texgyretermes-regular.otf in Resources */,
+				D5A7C9B92C059810000A2C52 /* WikipediaFrame.png in Resources */,
 				D5B700F92BC86C6800BD552C /* renumberedQs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,7 +419,8 @@
 				D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */,
 				D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */,
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
-				D5E044A92BDEC0AE00A49CE0 /* SymbolViews.swift in Sources */,
+				D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */,
+				D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */,
 				D5E044A72BDE29AC00A49CE0 /* WikiThumbnailView.swift in Sources */,
 				D5B700EF2BC74F6E00BD552C /* CoreDataModel.swift in Sources */,
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,

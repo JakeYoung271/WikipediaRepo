@@ -27,24 +27,26 @@ class Question: ObservableObject, Hashable {
     let subject: String
     let difficulty: Int
     let topic : String
+    let quote : String
     @Published var selectedIndex: Int
     @Published var complete: Bool
     @Published var clicks: Double
     
     init(){
-    id = 0
-    link =  "https://en.wikipedia.org/wiki/default"
-    question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
-    options = ["Cockroach","Fly", "Termite", "Beatle"]
-    correctIndex = 1
-    subject = "TestQuestion"
-    difficulty = 1
-    selectedIndex = 5
-    complete = false
-    //timeOnScreen = 0.1
-    clicks = 0.0
-    responseNums = [0,0,0,0]
-    topic = "default"
+        id = 0
+        link =  "https://en.wikipedia.org/wiki/default"
+        question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
+        options = ["Cockroach","Fly", "Termite", "Beatle"]
+        correctIndex = 1
+        subject = "TestQuestion"
+        difficulty = 1
+        selectedIndex = 5
+        complete = false
+        //timeOnScreen = 0.1
+        clicks = 0.0
+        responseNums = [0,0,0,0]
+        topic = "default"
+        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
     
     init(id1 : Int){
@@ -61,6 +63,7 @@ class Question: ObservableObject, Hashable {
         clicks = cQuest.clicks
         responseNums = cQuest.responseNums
         topic = cQuest.topic
+        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
         return
     }
     let sResult = CoreDataStack.shared.fetchID(id:id1)
@@ -84,6 +87,7 @@ class Question: ObservableObject, Hashable {
         clicks = 0.0
         responseNums = [0,0,0,0]
         topic = "default"
+        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
 
     }
     else{
@@ -100,6 +104,7 @@ class Question: ObservableObject, Hashable {
         clicks = 0.0
         responseNums = allResponses[id1]
         topic = Qbody.topic!
+        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
         }
     }
     
@@ -117,6 +122,7 @@ class Question: ObservableObject, Hashable {
     clicks = 0.0
     responseNums = resps
     self.topic = topic
+    quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
     
 }

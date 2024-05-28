@@ -43,7 +43,7 @@ struct ContentView: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(disp.IDList, id: \.self){x in
-                                QuestionDividerView(q: Question(id1:x))
+                                QuestionMenuView(q: Question(id1:x))
                                 Divider()
                                     .frame(height:1)
                                     .overlay(.gray)
