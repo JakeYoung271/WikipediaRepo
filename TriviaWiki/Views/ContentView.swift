@@ -56,6 +56,10 @@ struct ContentView: View {
                                     disp.IDList.append(qRec.pub.recommend())
                                     disp.IDList.append(qRec.pub.recommend())
                                     disp.IDList.append(qRec.pub.recommend())
+                                    disp.IDList.append(qRec.pub.recommend())
+                                    disp.IDList.append(qRec.pub.recommend())
+                                    disp.IDList.append(qRec.pub.recommend())
+                                    disp.IDList.append(qRec.pub.recommend())
                                 }
                                 .onDisappear
                                 {

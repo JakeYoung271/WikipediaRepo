@@ -32,16 +32,16 @@ struct QuestionMenuView: View, Identifiable {
                 VStack {
                     Text(question.question).font(.custom("texgyretermes-regular", size:25))
                         .multilineTextAlignment(.leading)
-                    Spacer(minLength: 20)
-                    //Divider()
-                    //Divider()
-                    Spacer(minLength: 20)
+                    Spacer()
+                        .frame(height:20)
                     ForEach(items.optionsView){x in
                         x
                     }
+                    Spacer()
+                        .frame(height:10)
                     QuestionMenu(question: question, report: {report.toggle()}, like: like, dislike: dislike)
                 }
-                .padding()
+                .padding(10)
                 if report {
                     ReportMenu(questionID: question.id, notReported: notReported, exitAction: {report = false}, submitAction: {notReported = false})
                         .fixedSize()
@@ -71,7 +71,8 @@ struct QuestionMenu: View {
     var body: some View {
         VStack {
             if showHint {
-                    NavigationLink(destination: WikipediaThumbnail(question: question)){
+                    NavigationLink(destination: WikipediaThumbnail(question: question)
+                        .onAppear(perform: {showHint.toggle()})){
                         WikiArticleThumbnailView(question:question)
                     }
             }
