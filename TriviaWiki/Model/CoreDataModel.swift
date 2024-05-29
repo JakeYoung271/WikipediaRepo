@@ -132,7 +132,7 @@ class CoreDataStack: ObservableObject {
             print("already loaded dump!!!")
             return
         }
-        let filename = "renumberedQs"
+        let filename = "QsWithHints"
         let dump = readJSONFile(forName : filename)
         if let dump = dump {
             let jsonQuestions = dump["qArray"] as! [[String : Any]]
@@ -144,6 +144,7 @@ class CoreDataStack: ObservableObject {
                 staticQuestion.answers = dict["options"] as! [String]
                 staticQuestion.category = dict["category"] as! String
                 staticQuestion.topic = dict["topic"] as! String
+                staticQuestion.quote = dict["quote"] as! String
             }
             do {
                 try persistentContainer.viewContext.save()

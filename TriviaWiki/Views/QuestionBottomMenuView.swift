@@ -71,9 +71,9 @@ struct QuestionMenu: View {
     var body: some View {
         VStack {
             if showHint {
-                    NavigationLink(destination: WikipediaThumbnail(question: question)
+                    NavigationLink(destination:  WebView(url:question.link)
                         .onAppear(perform: {showHint.toggle()})){
-                        WikiArticleThumbnailView(question:question)
+                            WikiArticleThumbnailView(question: question)
                     }
             }
             HStack{
