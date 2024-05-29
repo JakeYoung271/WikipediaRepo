@@ -15,6 +15,9 @@ struct QuestionMenuView: View, Identifiable {
     @State var report = false
     @State var notReported = true
     @State var enjoyed : Bool?
+    @State var forSure = false
+    @State var showCard = false
+    @State var hintSeen = false
     let id: UUID
     init(q:Question){
         id = UUID()
@@ -39,12 +42,15 @@ struct QuestionMenuView: View, Identifiable {
                     }
                     Spacer()
                         .frame(height:10)
-                    QuestionMenu(question: question, report: {report.toggle()}, like: like, dislike: dislike)
+                    QuestionMenu(question: question, showHint: $showCard, sawHint: $hintSeen, report: {report.toggle()}, like: like, dislike: dislike, showAreYouSure: {forSure.toggle()})
                 }
                 .padding(10)
                 if report {
                     ReportMenu(questionID: question.id, notReported: notReported, exitAction: {report = false}, submitAction: {notReported = false})
                         .fixedSize()
+                }
+                if forSure {
+                        AreYouSureView(yes:{forSure.toggle(); showCard = true; hintSeen = true}, no: {forSure.toggle()})
                 }
             }
         }
@@ -64,28 +70,41 @@ struct QuestionMenuView: View, Identifiable {
 
 struct QuestionMenu: View {
     @ObservedObject var question: Question
-    @State var showHint = false
+    @Binding var showHint : Bool
+    @Binding var sawHint : Bool
     let report: () -> Void
     let like: () -> Void
     let dislike: () -> Void
+    let showAreYouSure: () -> Void
     var body: some View {
         VStack {
             if showHint {
                     NavigationLink(destination:  WebView(url:question.link)
-                        .onAppear(perform: {showHint.toggle()})){
+                        .onAppear(perform:{showHint.toggle()})){
                             WikiArticleThumbnailView(question: question)
                     }
             }
             HStack{
                 Spacer()
                     .frame(width:5)
-                Article(action: {showHint.toggle()})
+                Article(action: {decideToShow()})
                 Spacer()
-                LikeDislikeMenu(likeAction: like, dislikeAction: dislike)
+                LikeDislikeMenu(likeAction: like, dislikeAction: dislike, question: question)
                 Spacer()
                 ReportButton(reportAction: report)
                 Spacer()
                     .frame(width:5)
+            }
+        }
+    }
+    func decideToShow(){
+        if question.complete || sawHint {
+            showHint.toggle()
+        } else {
+            if showHint {
+                showHint = false
+            } else {
+                showAreYouSure()
             }
         }
     }
@@ -155,9 +174,10 @@ struct LikeDislikeMenu: View {
     let dislikeAction : () -> Void
     @State var colorUP = Color.white
     @State var colorDOWN = Color.white
+    @State var question: Question
     var body: some View {
         HStack{
-            Button(action: {likeAction(); setColor(like: true)}) {
+            Button(action: {likeAction(); setColor(like: true); question.like()}) {
                 Image(systemName: "hand.thumbsup")
                     .font(.title3)
                     .foregroundColor(.black)
@@ -167,7 +187,7 @@ struct LikeDislikeMenu: View {
                             .fill(colorUP))
                     .padding(10)
             }
-            Button(action: {dislikeAction(); setColor(like: false)}) {
+            Button(action: {dislikeAction(); setColor(like: false); question.dislike()}) {
                 Image(systemName: "hand.thumbsdown")
                     .font(.title3)
                     .foregroundColor(.black)
@@ -214,5 +234,5 @@ struct LikeDislikeMenu: View {
 }
 
 #Preview {
-    QuestionMenuView(q:Question(id1:1))
+    QuestionMenuView(q:Question())
 }

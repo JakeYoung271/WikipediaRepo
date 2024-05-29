@@ -27,6 +27,12 @@ struct WikiArticleThumbnailView: View {
                                 .frame(width:15)
                         }
                         Spacer()
+                        HStack {
+                            Spacer()
+                            Text("(Tap Card To Reveal Article)       ")
+                                .offset(y:-10)
+                                .foregroundStyle(.black)
+                        }
                     }
                         Spacer()
                     VStack{
@@ -52,5 +58,5 @@ struct WikiArticleThumbnailView: View {
 }
 
 #Preview {
-    WikiArticleThumbnailView(question: Question(id1: 4))
+    WikiArticleThumbnailView(question: Question())
 }

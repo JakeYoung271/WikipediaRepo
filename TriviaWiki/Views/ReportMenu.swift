@@ -17,7 +17,7 @@ struct ReportMenu: View {
     @State var submitted = false
     @State var response = "Select Reason for Report"
     @State var comment = ""
-    let actions = ["Select Reason for Report", "Dumb/Uninteresting/Boring", "Factually Incorrect", "Misleading/Unclear", "Offfensive/Insensitive", "Other"]
+    let actions = ["Select Reason for Report", "Dumb/Uninteresting/Boring", "Factually Incorrect", "Misleading/Unclear", "Offfensive/Insensitive", "Bad Hint/Article Quote", "Other"]
     var body: some View {
         VStack{
             HStack {

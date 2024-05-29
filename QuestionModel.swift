@@ -124,5 +124,10 @@ class Question: ObservableObject, Hashable {
     self.topic = topic
     quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
-    
+    func like() -> Void {
+        return
+    }
+    func dislike() -> Void {
+        return
+    }
 }

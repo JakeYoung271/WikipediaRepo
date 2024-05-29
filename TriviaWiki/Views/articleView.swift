@@ -7,21 +7,6 @@
 
 import SwiftUI
 
-struct WikipediaThumbnail: View {
-    @ObservedObject var question : Question
-    var body: some View {
-        VStack (spacing:0){
-            ArticleTopBar()
-            ZStack{
-                RoundedRectangle(cornerRadius:20)
-                    .strokeBorder(.white, lineWidth:  1)
-                    .shadow(radius: 10)
-                WebView(url: question.link)
-            }
-        }
-        .frame(minHeight:200)
-    }
-}
 
 struct ArticleTopBar: View {
     var body: some View{
