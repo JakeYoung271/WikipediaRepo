@@ -32,7 +32,7 @@ class CoreDataStack: ObservableObject {
     }()
     
     private init() {
-        loadDump0()
+        loadDump(name: "dump0")
         initSeenList()
     }
     
@@ -121,22 +121,26 @@ class CoreDataStack: ObservableObject {
        } catch {
           print(error)
        }
-        return nil//[String : Any]()
+        return nil
     }
-    
-    func loadDump0(){
-        print("loading dump")
-        print("checking if already loaded")
-        let result = fetchID(id: 1602)
+    func checkQDownloaded(id: Int) -> Bool {
+        let result = fetchID(id: id)
         if result.count != 0{
             print("already loaded dump!!!")
-            return
+            return true
         }
-        let filename = "QsWithHints"
-        let dump = readJSONFile(forName : filename)
+        return false
+    }
+    
+    func loadDump(name: String){
+        print("loading dump \(name)")
+        let dump = readJSON(name:name)
         if let dump = dump {
             let jsonQuestions = dump["qArray"] as! [[String : Any]]
             for dict in jsonQuestions{
+                if checkQDownloaded(id: dict["id"] as! Int){
+                    continue
+                }
                 let staticQuestion = QStatic(context: persistentContainer.viewContext)
                 staticQuestion.id = dict["id"] as! Int64
                 staticQuestion.question = dict["question"] as! String

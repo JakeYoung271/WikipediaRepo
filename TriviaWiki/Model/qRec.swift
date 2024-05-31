@@ -23,6 +23,10 @@ class qRec : ObservableObject {
         setupLists()
     }
     
+    func updateQRec(){
+        
+    }
+    
     func updateMode(newMode : String) -> Bool {
         if newMode != mode {
             mode = newMode

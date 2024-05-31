@@ -12,7 +12,7 @@ struct AreYouSureView: View {
     var no: ()-> Void
     var body: some View {
         VStack{
-            Text("Are you sure you want to reveal the answer?")
+            Text("Are you sure you want to see the answer?")
                 .font(.title)
                 .multilineTextAlignment(.center)
             HStack{

@@ -51,6 +51,7 @@ struct QuestionMenuView: View, Identifiable {
                 }
                 if forSure {
                         AreYouSureView(yes:{forSure.toggle(); showCard = true; hintSeen = true}, no: {forSure.toggle()})
+                        .padding()
                 }
             }
         }

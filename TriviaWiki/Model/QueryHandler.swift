@@ -10,7 +10,6 @@ import Firebase
 import FirebaseCore
 import UIKit
 
-
 class fbase {
     let TIME_OFFSET = 1713426675.0
     static let pub = fbase()
@@ -64,8 +63,35 @@ class fbase {
     }
     
     //implement this!!
-    func updateHardCodedVals(){
-        
+    func getRatingsDoc() async {
+        let db = Firestore.firestore()
+        let docRef = db.collection("ratings").document("currRatings")
+        do {
+            let document = try await docRef.getDocument()
+            if var data = document.data() {
+                let time = Int(NSDate().timeIntervalSince1970 - TIME_OFFSET)
+                data["time"] = time
+                writeJSON(name: "currRatings", data: data)
+            }
+        } catch {
+            print("failed to download ratings because of \(error)")
+        }
+        qRec.pub.updateQRec()
+    }
+    
+    func getDumpDoc(name: String) async -> Bool {
+        let db = Firestore.firestore()
+        let docRef = db.collection("dumps").document(name)
+        do {
+            let document = try await docRef.getDocument()
+            if let data = document.data() {
+                writeJSON(name: name, data: data)
+                return true
+            }
+        } catch {
+            print("failed to download dump because of \(error)")
+        }
+        return false
     }
     
     //implement this function!
