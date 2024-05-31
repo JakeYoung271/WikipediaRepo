@@ -32,9 +32,7 @@ struct QuestionAnswer: View, Identifiable {
             }
             else {
                 if question.complete == false {
-                    question.complete = true
-                    question.selectedIndex = x
-                    qRec.pub.seeProblem(q: question)
+                    question.complete(index: x)
                     QuestionHistoryManager.pub.addQuestion(q: question)
                 }
             }

@@ -13,13 +13,10 @@ class qRec : ObservableObject {
     let genCats = ["Science", "Humanities", "Arts and Culture"]
     var cIds : [[(Int,Int)]]
     var mode : String
-    var seen : Set<Int>
     
     private init() {
         cIds = [[(Int,Int)](),[(Int,Int)](),[(Int,Int)]()]
-        seen = Set<Int>()
         mode = "Random"
-        setupSeen()
         setupLists()
     }
     
@@ -36,25 +33,17 @@ class qRec : ObservableObject {
         return false
     }
 
-    func setupSeen(){
-        let arrSeen = CoreDataStack.shared.mSeen!.allSeen!
-        print("seen problems are:")
-        for i in arrSeen{
-            seen.insert(i[0])
-            print(String(describing:i), terminator : " ")
-        }
-    }
     
-    func seeProblem(q : Question){
-        print("seeing problem : id: \(q.id), question : \(q.question)")
-        print("my ratings are \(String(describing: CoreDataStack.shared.mSeen!.ratings))")
-        seen.insert(q.id)
-        CoreDataStack.shared.updateRating(q:q)
-        CoreDataStack.shared.mSeen!.allSeen!.append([q.id,q.selectedIndex])
-        CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
-        CoreDataStack.shared.trySave()
-        Task { await fbase.pub.updateActivityLog()}
-    }
+//    func seeProblem(q : Question){
+//        print("seeing problem : id: \(q.id), question : \(q.question)")
+//        print("my ratings are \(String(describing: CoreDataStack.shared.mSeen!.ratings))")
+//        seen.insert(q.id)
+//        CoreDataStack.shared.updateRating(q:q)
+//        CoreDataStack.shared.mSeen!.allSeen!.append([q.id,q.selectedIndex])
+//        CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
+//        CoreDataStack.shared.trySave()
+//        Task { await fbase.pub.updateActivityLog()}
+//    }
     
     func generalCat(cat:String) ->Int{
         let Sci = ["Medicine", "Mathematicians", "Economics", "Chemistry", "Mathematics", "Physics"]
@@ -67,21 +56,13 @@ class qRec : ObservableObject {
     }
     
     private func setupLists() {
-        for i in 0..<indicesByCat.count-1
-        {
-            var counter = indicesByCat[i].1
-            let index = generalCat(cat: indicesByCat[i].0)
-            print("beginning to parse indicesByCat")
-            while counter < indicesByCat[i+1].1
-            {
-                //if qData.pub.getSeen(id:counter) == -1
-                if !seen.contains(counter)
-                {
-                    cIds[index].append((counter,allRatings[counter]))
-                }
-                counter += 1
+        for i in 0..<DataManager.shared.numQuestions{
+            let cat = DataManager.shared.getQuestionN(n: i)["category"] as! String
+            let rating = DataManager.shared.ratings[i]
+            let index = generalCat(cat: cat)
+            if !HistoryManager.shared.seen(id: i) {
+                cIds[index].append((i, rating))
             }
-
         }
         print("Sorting lists in qRec.setupLists")
         cIds[0].sort(by: {$0.1 < $1.1})
@@ -95,7 +76,7 @@ class qRec : ObservableObject {
     
     func getBestInCat(catIndex : Int) -> Int{
         var result = -1
-        let targetRating = CoreDataStack.shared.mSeen!.ratings![catIndex]
+        let targetRating = HistoryManager.shared.ratings[catIndex]
         //basic binary search
         var a = 0
         var b = cIds[catIndex].count-1
@@ -122,7 +103,7 @@ class qRec : ObservableObject {
             if candInd > 0 && candInd < cIds[catIndex].count {
                 score -= abs(targetRating - cIds[catIndex][candInd].1)
                 //sets a penalty for more played questions: preferentially recommends less seen questions
-                let timesPlayed = allResponses[cIds[catIndex][candInd].0].reduce(0, +)
+                let timesPlayed = DataManager.shared.timesSeen[cIds[catIndex][candInd].0].reduce(0, +)
                 if timesPlayed > 100{
                     score -= 50
                 }

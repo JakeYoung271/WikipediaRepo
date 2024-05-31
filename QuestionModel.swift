@@ -31,6 +31,9 @@ class Question: ObservableObject, Hashable {
     @Published var selectedIndex: Int
     @Published var complete: Bool
     @Published var clicks: Double
+    @Published var liked: Bool?
+    @Published var reported: String?
+    @Published var sawHint = false
     
     init(){
         id = 0
@@ -77,7 +80,7 @@ class Question: ObservableObject, Hashable {
         selectedIndex = 5
         complete = false
         clicks = 0.0
-        responseNums = allResponses[id1]
+        responseNums = DataManager.shared.timesSeen[id1]
         topic = q["topic"] as! String
         quote = q["quote"] as! String
     }
@@ -98,10 +101,36 @@ class Question: ObservableObject, Hashable {
     self.topic = topic
     quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
+    
+    func complete(index: Int){
+        complete = true
+        selectedIndex = index
+        see()
+        HistoryManager.shared.updateRatings(q: self)
+    }
+    func report(comment: String){
+        reported = comment
+        see()
+    }
+    func see(){
+        HistoryManager.shared.see(q:self)
+    }
     func like() -> Void {
-        return
+        liked = true
+        see()
     }
     func dislike() -> Void {
-        return
+        liked = false
+        see()
+    }
+    func makeDict() -> [String: Any]{
+        var result : [String: Any] = ["id": id, "selected" : selectedIndex]
+        if let enjoyed = liked {
+            result["liked"] = enjoyed
+        }
+        if let report = reported {
+            result["report"] = report
+        }
+        return result
     }
 }

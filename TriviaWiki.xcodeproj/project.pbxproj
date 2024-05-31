@@ -21,6 +21,7 @@
 		D59920DC2C07E48A00572D12 /* dump0.json in Resources */ = {isa = PBXBuildFile; fileRef = D59920DB2C07E48A00572D12 /* dump0.json */; };
 		D59920DE2C08FEFB00572D12 /* JSONHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920DD2C08FEFB00572D12 /* JSONHandler.swift */; };
 		D59920E02C0903AB00572D12 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920DF2C0903AB00572D12 /* DataManager.swift */; };
+		D59920E22C09A78A00572D12 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920E12C09A78A00572D12 /* HistoryManager.swift */; };
 		D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */; };
 		D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */; };
 		D5A7C9B92C059810000A2C52 /* WikipediaFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */; };
@@ -96,6 +97,7 @@
 		D59920DB2C07E48A00572D12 /* dump0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dump0.json; sourceTree = "<group>"; };
 		D59920DD2C08FEFB00572D12 /* JSONHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHandler.swift; sourceTree = "<group>"; };
 		D59920DF2C0903AB00572D12 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D59920E12C09A78A00572D12 /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBottomMenuView.swift; sourceTree = "<group>"; };
 		D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticleThumbnailView.swift; sourceTree = "<group>"; };
 		D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WikipediaFrame.png; sourceTree = "<group>"; };
@@ -227,11 +229,12 @@
 			children = (
 				D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */,
 				D59920DF2C0903AB00572D12 /* DataManager.swift */,
+				D59920E12C09A78A00572D12 /* HistoryManager.swift */,
 				D5B700EE2BC74F6E00BD552C /* CoreDataModel.swift */,
 				D5BD8D572BBC999E00D83117 /* QuestionModel.swift */,
+				D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */,
 				D59920DD2C08FEFB00572D12 /* JSONHandler.swift */,
 				D5CA9ED72BC35926006EE2D3 /* HardCodedVals.swift */,
-				D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
 				D59920DE2C08FEFB00572D12 /* JSONHandler.swift in Sources */,
 				D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */,
+				D59920E22C09A78A00572D12 /* HistoryManager.swift in Sources */,
 				D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */,
 				D5B700EF2BC74F6E00BD552C /* CoreDataModel.swift in Sources */,
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,

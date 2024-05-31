@@ -36,7 +36,7 @@ struct InertQuestion: View {
                     ForEach(items.optionsView){x in
                         x
                     }
-                    QuestionMenu(question: question, showHint: $showCard, sawHint: $sawCard, report: {report.toggle()}, like: {}, dislike: {}, showAreYouSure: {})
+                    QuestionMenu(question: question, showHint: $showCard, report: {report.toggle()}, showAreYouSure: {})
                 }
                 .padding()
                 if report {

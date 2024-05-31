@@ -42,7 +42,7 @@ struct QuestionMenuView: View, Identifiable {
                     }
                     Spacer()
                         .frame(height:10)
-                    QuestionMenu(question: question, showHint: $showCard, sawHint: $hintSeen, report: {report.toggle()}, like: like, dislike: dislike, showAreYouSure: {forSure.toggle()})
+                    QuestionMenu(question: question, showHint: $showCard, report: {report.toggle()}, showAreYouSure: {forSure.toggle()})
                 }
                 .padding(10)
                 if report {
@@ -50,32 +50,17 @@ struct QuestionMenuView: View, Identifiable {
                         .fixedSize()
                 }
                 if forSure {
-                        AreYouSureView(yes:{forSure.toggle(); showCard = true; hintSeen = true}, no: {forSure.toggle()})
+                    AreYouSureView(yes:{forSure.toggle(); showCard = true; question.sawHint = true}, no: {forSure.toggle()})
                         .padding()
                 }
             }
         }
-   func like(){
-        notRated = false
-        enjoyed = true
-       print("liked")
-       fbase.pub.addResponse(id: question.id, likedQ: true)
-    }
-    func dislike(){
-        notRated = false
-        enjoyed = false
-        print("disliked")
-        fbase.pub.addResponse(id: question.id, likedQ: false)
-    }
 }
 
 struct QuestionMenu: View {
     @ObservedObject var question: Question
     @Binding var showHint : Bool
-    @Binding var sawHint : Bool
     let report: () -> Void
-    let like: () -> Void
-    let dislike: () -> Void
     let showAreYouSure: () -> Void
     var body: some View {
         VStack {
@@ -90,7 +75,7 @@ struct QuestionMenu: View {
                     .frame(width:5)
                 Article(action: {decideToShow()})
                 Spacer()
-                LikeDislikeMenu(likeAction: like, dislikeAction: dislike, question: question)
+                LikeDislikeMenu(question: question)
                 Spacer()
                 ReportButton(reportAction: report)
                 Spacer()
@@ -99,7 +84,7 @@ struct QuestionMenu: View {
         }
     }
     func decideToShow(){
-        if question.complete || sawHint {
+        if question.complete || question.sawHint {
             showHint.toggle()
         } else {
             if showHint {
@@ -171,14 +156,12 @@ struct Info: View {
 }
 
 struct LikeDislikeMenu: View {
-    let likeAction : () -> Void
-    let dislikeAction : () -> Void
     @State var colorUP = Color.white
     @State var colorDOWN = Color.white
-    @State var question: Question
+    @ObservedObject var question: Question
     var body: some View {
         HStack{
-            Button(action: {likeAction(); setColor(like: true); question.like()}) {
+            Button(action: {question.like(); setColor() }) {
                 Image(systemName: "hand.thumbsup")
                     .font(.title3)
                     .foregroundColor(.black)
@@ -188,7 +171,7 @@ struct LikeDislikeMenu: View {
                             .fill(colorUP))
                     .padding(10)
             }
-            Button(action: {dislikeAction(); setColor(like: false); question.dislike()}) {
+            Button(action: { question.dislike(); setColor()}) {
                 Image(systemName: "hand.thumbsdown")
                     .font(.title3)
                     .foregroundColor(.black)
@@ -207,29 +190,18 @@ struct LikeDislikeMenu: View {
             
         )
     }
-    func setColor(like:Bool){
-        if colorUP == Color.white && colorDOWN == Color.white {
-            if like {
+    func setColor(){
+        if let enjoyed = question.liked {
+            if enjoyed {
                 colorUP = Color("LightGreen")
+                colorDOWN = Color(.white)
             } else {
+                colorUP = Color(.white)
                 colorDOWN = Color("LightRed")
             }
         } else {
-            if like {
-                if colorUP == Color("LightGreen") {
-                    colorUP = Color.white
-                } else {
-                    colorUP = Color("LightGreen")
-                    colorDOWN = Color.white
-                }
-            } else {
-                if colorDOWN == Color("LightRed") {
-                    colorDOWN = Color.white
-                } else {
-                    colorUP = Color.white
-                    colorDOWN = Color("LightRed")
-                }
-            }
+            colorUP = Color(.white)
+            colorDOWN = Color(.white)
         }
     }
 }

@@ -14,16 +14,30 @@ class DataManager {
     let TIME_OFFSET = 1713426675.0
     var questionsList : [[String: Any]]
     var dumps : [Int]
-    var ratings : [String: Any]
+    var ratingsDoc : [String: Any]
     var numQuestions: Int
+    var ratings : [Int]
+    var timesSeen : [[Int]]
     var dumpsLoaded: Int
-    init(){
+    private init(){
         questionsList = [[String: Any]]()
         numQuestions = 0
         dumpsLoaded = 0
-        ratings = readJSON(name: "currRatings")!
-        dumps = ratings["dumps"] as! [Int]
+        ratingsDoc = readJSON(name: "currRatings")!
+        dumps = ratingsDoc["dumps"] as! [Int]
+        ratings = ratingsDoc["allRatings"] as! [Int]
+        timesSeen = [[Int]]()
         initializeQuestionList()
+        setTimesSeen()
+    }
+    
+    func setTimesSeen() {
+        let responsesDict = ratingsDoc["allResponses"] as! [[String:[Int]]]
+        timesSeen = [[Int]]()
+        for i in 0..<numQuestions {
+            let toAdd = responsesDict[i]
+            timesSeen.append(toAdd[String(i)] as! [Int])
+        }
     }
     
     //sets up questionList and asserts that num of questions read matches number in list and such. Calls addDump to add one more dump if necessary assuming you will rarely need more than one at once
@@ -39,11 +53,7 @@ class DataManager {
                     break
                 }
             } else {
-                Task { if await fbase.pub.getDumpDoc(name:name){
-                        addDump(name:name)
-                    } else {
-                        print("ERROR: Failed to retrieve dump \(name) in call to fbase::getDumpDoc from DataManager::initializeQuestionsList")
-                    }}
+                print("POTENTIAL ERROR: failed to find JSON \(name) when running DataManager::initializedQuestionList")
                 break
             }
             numQuestions += length
@@ -82,11 +92,11 @@ class DataManager {
     func updateRatings() async {
         print("Running DataManager::UpdateRatings")
         let time = Int(NSDate().timeIntervalSince1970 - TIME_OFFSET)
-        let lastUpdate = ratings["time"] as! Int
+        let lastUpdate = ratingsDoc["time"] as! Int
         if time - lastUpdate > 43200 {
             await fbase.pub.getRatingsDoc()
-            ratings = readJSON(name: "currRatings")!
-            dumps = ratings["dumps"] as! [Int]
+            ratingsDoc = readJSON(name: "currRatings")!
+            dumps = ratingsDoc["dumps"] as! [Int]
             var counter = dumpsLoaded
             while counter < dumps.count {
                 if await fbase.pub.getDumpDoc(name: "dump\(counter)"){
