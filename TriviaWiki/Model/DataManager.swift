@@ -54,8 +54,17 @@ class DataManager {
         }
     }
     
+    func getQuestionN(n:Int) -> [String: Any]{
+        if n < numQuestions {
+        } else {
+                print("FATAL ERROR: ASKED FOR QUESTION NOT IN RANGE")
+            }
+            return questionsList[n]
+        }
+    
     //function for adding one more dump to the files
     func addDump(name:String){
+        print("Running Add Dump")
         if findJSON(name:name){
             if let data = readJSON(name:name){
                 let toAdd = data["qArray"] as! [[String: Any]]
@@ -71,8 +80,9 @@ class DataManager {
     }
     
     func updateRatings() async {
-        var time = Int(NSDate().timeIntervalSince1970 - TIME_OFFSET)
-        var lastUpdate = ratings["time"] as! Int
+        print("Running DataManager::UpdateRatings")
+        let time = Int(NSDate().timeIntervalSince1970 - TIME_OFFSET)
+        let lastUpdate = ratings["time"] as! Int
         if time - lastUpdate > 43200 {
             await fbase.pub.getRatingsDoc()
             ratings = readJSON(name: "currRatings")!
@@ -81,8 +91,10 @@ class DataManager {
             while counter < dumps.count {
                 if await fbase.pub.getDumpDoc(name: "dump\(counter)"){
                     addDump(name:"dump\(counter)")
+                    counter += 1
                 } else {
                     print("ERROR: failed to get dump\(counter), will re-attempt on next refresh")
+                    break
                 }
             }
         }

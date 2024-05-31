@@ -47,3 +47,25 @@ func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
 }
+
+func copyPreloadedFilesToDocuments() {
+    let fileManager = FileManager.default
+    let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    let fileNames = ["dump0", "currRatings"] // Add all file names without extension here
+    
+    for fileName in fileNames {
+        if let bundleFileURL = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            let destinationURL = documentsURL.appendingPathComponent("\(fileName).json")
+            
+            do {
+                if !fileManager.fileExists(atPath: destinationURL.path) {
+                    try fileManager.copyItem(at: bundleFileURL, to: destinationURL)
+                    print("Copied \(fileName).json to Documents directory")
+                }
+            } catch {
+                print("Error copying file: \(error.localizedDescription)")
+            }
+        }
+    }
+}

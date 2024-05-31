@@ -141,6 +141,7 @@ class qRec : ObservableObject {
         }
         result = cIds[catIndex][maxIndex].0
         cIds[catIndex].remove(at:maxIndex)
+        print(result)
         return result
     }
     

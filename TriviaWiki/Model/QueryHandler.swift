@@ -26,6 +26,7 @@ class fbase {
         }
     }
     
+    //return to this
     func updateActivityLog() async {
         print("updateActivity log called")
         let entriesCount = CoreDataStack.shared.mSeen!.allSeen!.count
@@ -62,7 +63,6 @@ class fbase {
         disliked = []
     }
     
-    //implement this!!
     func getRatingsDoc() async {
         let db = Firestore.firestore()
         let docRef = db.collection("ratings").document("currRatings")

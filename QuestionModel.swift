@@ -66,46 +66,20 @@ class Question: ObservableObject, Hashable {
         quote = cQuest.quote
         return
     }
-    let sResult = CoreDataStack.shared.fetchID(id:id1)
-    if sResult.count != 1 {
-        for i in sResult{
-            print(i.question)
-        }
-        print(sResult.count)
-        print("tried to initialize question with fetched ID, failed on question with id \(id1)")
+        let q = DataManager.shared.getQuestionN(n: id1)
         id = id1
-        link =  "https://en.wikipedia.org/wiki/default"
-        question = "Failed to Generate Question with id \(id). Guess why the answer options are relevant. Hint (this question is a ..."
-        options = ["Cockroach","Fly", "Termite", "Beatle"]
-//        responseRates = [0.5,0.5,0.5,0.5]
-        correctIndex = 1
-        subject = "TestQuestion"
-        difficulty = 1
-        selectedIndex = 5
-        complete = false
-        //timeOnScreen = 0.1
-        clicks = 0.0
-        responseNums = [0,0,0,0]
-        topic = "default"
-        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
-
-    }
-    else{
-        let Qbody = sResult[0]
-        id = id1
-        link =  "https://en.wikipedia.org/wiki/" + (Qbody.topic!).replacingOccurrences(of: " ", with: "_")
-        question = Qbody.question!
-        options = Qbody.answers!
-        correctIndex = Int(Qbody.correct)
-        subject = Qbody.category!
+        link =  "https://en.wikipedia.org/wiki/" + (q["topic"] as! String).replacingOccurrences(of: " ", with: "_")
+        question = q["question"] as! String
+        options = q["options"] as! [String]
+        correctIndex = q["correct"] as! Int
+        subject = q["category"] as! String
         difficulty = 0
         selectedIndex = 5
         complete = false
         clicks = 0.0
         responseNums = allResponses[id1]
-        topic = Qbody.topic!
-        quote = Qbody.quote!
-        }
+        topic = q["topic"] as! String
+        quote = q["quote"] as! String
     }
     
     

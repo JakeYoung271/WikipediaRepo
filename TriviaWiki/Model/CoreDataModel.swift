@@ -126,7 +126,7 @@ class CoreDataStack: ObservableObject {
     func checkQDownloaded(id: Int) -> Bool {
         let result = fetchID(id: id)
         if result.count != 0{
-            print("already loaded dump!!!")
+            //print("already loaded dump!!!")
             return true
         }
         return false
