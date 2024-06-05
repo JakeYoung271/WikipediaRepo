@@ -15,8 +15,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     FirebaseApp.configure()
     Database.database().isPersistenceEnabled = true
     copyPreloadedFilesToDocuments()
+      Task { await DataManager.shared.updateRatings()}
     return true
   }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        HistoryManager.shared.save()
+        }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        HistoryManager.shared.save()
+        }
 }
 
 

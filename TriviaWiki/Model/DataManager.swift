@@ -29,6 +29,14 @@ class DataManager {
         timesSeen = [[Int]]()
         initializeQuestionList()
         setTimesSeen()
+        
+        print("Finished running DataManager::initializer, here is the status of its members")
+        print("questionsList contains \(questionsList.count) entries with first entry: \(questionsList[0])")
+        print("numQuestions is: \(numQuestions)")
+        print("dumps loaded is: \(dumpsLoaded)")
+        print("ratings contains \(ratings.count) entries and its first entry is \(ratings[0])")
+        print("timesSeen has length \(timesSeen.count) with first entry: \(timesSeen[0])")
+        
     }
     
     func setTimesSeen() {
@@ -38,6 +46,7 @@ class DataManager {
             let toAdd = responsesDict[i]
             timesSeen.append(toAdd[String(i)] as! [Int])
         }
+        print("RAN DataManager::setTimesSeen:")
     }
     
     //sets up questionList and asserts that num of questions read matches number in list and such. Calls addDump to add one more dump if necessary assuming you will rarely need more than one at once
@@ -62,6 +71,7 @@ class DataManager {
         if numQuestions != questionsList.count {
             print("FATAL ERROR: DataManager.questionList count mismatched numQuestions")
         }
+        print("RAN DataManager::initializeQuestionList, here is the status of all data members:")
     }
     
     func getQuestionN(n:Int) -> [String: Any]{
@@ -107,6 +117,7 @@ class DataManager {
                     break
                 }
             }
+            Task {qRec.pub.setupLists()}
         }
     }
 }

@@ -33,7 +33,6 @@ struct QuestionAnswer: View, Identifiable {
             else {
                 if question.complete == false {
                     question.complete(index: x)
-                    QuestionHistoryManager.pub.addQuestion(q: question)
                 }
             }
         }){

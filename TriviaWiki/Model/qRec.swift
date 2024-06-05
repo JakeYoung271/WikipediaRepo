@@ -27,23 +27,10 @@ class qRec : ObservableObject {
     func updateMode(newMode : String) -> Bool {
         if newMode != mode {
             mode = newMode
-            print("ran mode updator")
             return true
         }
         return false
     }
-
-    
-//    func seeProblem(q : Question){
-//        print("seeing problem : id: \(q.id), question : \(q.question)")
-//        print("my ratings are \(String(describing: CoreDataStack.shared.mSeen!.ratings))")
-//        seen.insert(q.id)
-//        CoreDataStack.shared.updateRating(q:q)
-//        CoreDataStack.shared.mSeen!.allSeen!.append([q.id,q.selectedIndex])
-//        CoreDataStack.shared.mSeen!.numSeen![generalCat(cat: q.subject)] += 1
-//        CoreDataStack.shared.trySave()
-//        Task { await fbase.pub.updateActivityLog()}
-//    }
     
     func generalCat(cat:String) ->Int{
         let Sci = ["Medicine", "Mathematicians", "Economics", "Chemistry", "Mathematics", "Physics"]
@@ -55,7 +42,9 @@ class qRec : ObservableObject {
         return -1
     }
     
-    private func setupLists() {
+    func setupLists() {
+        print("RUNNING qRec::setupLists")
+        cIds = [[(Int,Int)](),[(Int,Int)](),[(Int,Int)]()]
         for i in 0..<DataManager.shared.numQuestions{
             let cat = DataManager.shared.getQuestionN(n: i)["category"] as! String
             let rating = DataManager.shared.ratings[i]
@@ -64,14 +53,9 @@ class qRec : ObservableObject {
                 cIds[index].append((i, rating))
             }
         }
-        print("Sorting lists in qRec.setupLists")
         cIds[0].sort(by: {$0.1 < $1.1})
         cIds[1].sort(by: {$0.1 < $1.1})
         cIds[2].sort(by: {$0.1 < $1.1})
-        print("lists filled and sorted!")
-        print(cIds[0].count)
-        print(cIds[1].count)
-        print(cIds[2].count)
     }
     
     func getBestInCat(catIndex : Int) -> Int{
@@ -122,7 +106,7 @@ class qRec : ObservableObject {
         }
         result = cIds[catIndex][maxIndex].0
         cIds[catIndex].remove(at:maxIndex)
-        print(result)
+        print("displaying question: \(result)")
         return result
     }
     

@@ -10,6 +10,38 @@ import SwiftUI
 
 var example = Question()
 
+class questionFactory {
+    static let shared = questionFactory()
+    var ids : Set<Int>
+    var questionCache : [Int: Question]
+    private init(){
+        ids = Set<Int>()
+        questionCache = [Int: Question]()
+    }
+    func getQuestion(id: Int) -> Question {
+        if ids.contains(id){
+            return questionCache[id]!
+        }
+        var toReturn = Question(id1: id)
+        if let data = HistoryManager.shared.seen[String(id)] as? [String: Any] {
+            toReturn.selectedIndex = data["selected"] as! Int
+            toReturn.sawHint = data["revealed"] as! Bool
+            if toReturn.selectedIndex < 4 {
+                toReturn.complete = true
+            }
+            if let liked = data["liked"] as? Bool{
+                toReturn.liked = liked
+            }
+            if let report = data["report"] as? String{
+                toReturn.reported = report
+            }
+        }
+        ids.insert(id)
+        questionCache[id] = toReturn
+        return toReturn
+    }
+}
+
 class Question: ObservableObject, Hashable {
     static func == (lhs: Question, rhs: Question) -> Bool {
         ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
@@ -30,7 +62,7 @@ class Question: ObservableObject, Hashable {
     let quote : String
     @Published var selectedIndex: Int
     @Published var complete: Bool
-    @Published var clicks: Double
+    //@Published var clicks: Double
     @Published var liked: Bool?
     @Published var reported: String?
     @Published var sawHint = false
@@ -46,29 +78,13 @@ class Question: ObservableObject, Hashable {
         selectedIndex = 5
         complete = false
         //timeOnScreen = 0.1
-        clicks = 0.0
+        //clicks = 0.0
         responseNums = [0,0,0,0]
         topic = "default"
         quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
     
     init(id1 : Int){
-    if let cQuest = QuestionHistoryManager.pub.IDCache[id1]{
-        id = id1
-        link = cQuest.link
-        question = cQuest.question
-        options = cQuest.options
-        correctIndex = cQuest.correctIndex
-        subject = cQuest.subject
-        difficulty = cQuest.difficulty
-        selectedIndex = cQuest.selectedIndex
-        complete = cQuest.complete
-        clicks = cQuest.clicks
-        responseNums = cQuest.responseNums
-        topic = cQuest.topic
-        quote = cQuest.quote
-        return
-    }
         let q = DataManager.shared.getQuestionN(n: id1)
         id = id1
         link =  "https://en.wikipedia.org/wiki/" + (q["topic"] as! String).replacingOccurrences(of: " ", with: "_")
@@ -79,14 +95,13 @@ class Question: ObservableObject, Hashable {
         difficulty = 0
         selectedIndex = 5
         complete = false
-        clicks = 0.0
+        //clicks = 0.0
         responseNums = DataManager.shared.timesSeen[id1]
         topic = q["topic"] as! String
         quote = q["quote"] as! String
     }
-    
-    
-    init(id1: Int, topic: String, q: String, opts: [String], resps: [Int], corr: Int, cat: String, diff: Int){
+        
+    init(id1: Int, topic: String, q: String, opts: [String], resps: [Int], corr: Int, cat: String, diff: Int, mQuote: String){
     id = id1
     link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
     question = q
@@ -96,19 +111,20 @@ class Question: ObservableObject, Hashable {
     difficulty = diff
     selectedIndex = 5
     complete = false
-    clicks = 0.0
+    //clicks = 0.0
     responseNums = resps
     self.topic = topic
-    quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
+    quote = mQuote
     }
     
     func complete(index: Int){
+        print("RUNNING complete on question with id: \(id), selected index is \(index)")
         complete = true
         selectedIndex = index
         see()
-        HistoryManager.shared.updateRatings(q: self)
     }
     func report(comment: String){
+        print("RUNNING report on question with id: \(id), with comment \(comment)")
         reported = comment
         see()
     }
@@ -116,15 +132,28 @@ class Question: ObservableObject, Hashable {
         HistoryManager.shared.see(q:self)
     }
     func like() -> Void {
-        liked = true
+        print("LIKED question with id \(id)")
+        if liked==nil || liked!==false{
+            liked = true
+        } else {
+            liked = nil
+            print("ACTUALLY UNLIKED")
+        }
         see()
     }
     func dislike() -> Void {
-        liked = false
+        print("DISLIKED question with id \(id)")
+        if liked==nil || liked!==true{
+            liked = false
+        } else {
+            liked = nil
+            print("ACTUALLY UNDISLIKED")
+        }
         see()
     }
+    
     func makeDict() -> [String: Any]{
-        var result : [String: Any] = ["id": id, "selected" : selectedIndex]
+        var result : [String: Any] = ["id": id, "selected" : selectedIndex, "revealed": sawHint]
         if let enjoyed = liked {
             result["liked"] = enjoyed
         }

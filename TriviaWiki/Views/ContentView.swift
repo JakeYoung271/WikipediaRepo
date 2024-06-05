@@ -39,11 +39,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack (spacing:0){
-                topBarView()
+                topBarView(changeable: true)
                     ScrollView {
                         LazyVStack {
                             ForEach(disp.IDList, id: \.self){x in
-                                QuestionMenuView(q: Question(id1:x))
+                                QuestionMenuView(q: questionFactory.shared.getQuestion(id: x))
                                 Divider()
                                     .frame(height:1)
                                     .overlay(.gray)
@@ -52,7 +52,6 @@ struct ContentView: View {
                                 .padding()
                                 .onAppear
                                 {
-                                    print("in content view: adding question \(self.counter)")
                                     disp.IDList.append(qRec.pub.recommend())
                                     disp.IDList.append(qRec.pub.recommend())
                                     disp.IDList.append(qRec.pub.recommend())
@@ -63,7 +62,6 @@ struct ContentView: View {
                                 }
                                 .onDisappear
                                 {
-                                    print("loader disappeared")
                                 }
                         }
                 }
@@ -73,6 +71,7 @@ struct ContentView: View {
 }
 
 struct topBarView: View {
+    let changeable : Bool
     var body: some View{
             VStack (spacing:0){
                 Rectangle()
@@ -84,7 +83,7 @@ struct topBarView: View {
                             Text("Browse")
                                 .font(.title2)
                             Spacer()
-                            TopicMenu()
+                            TopicMenu(changeable: changeable)
                             Spacer()
                             NavigationLink(destination: HistList()) { Text("History")
                             }
@@ -100,6 +99,7 @@ struct topBarView: View {
 }
 
 struct TopicMenu: View {
+    let changeable : Bool
     @State private var selection = "Random"
     let topics = ["Arts and Culture", "Science", "Humanities", "Random"]
     var body: some View{
@@ -113,7 +113,7 @@ struct TopicMenu: View {
             .onReceive(Just(selection)) { newValue in
                 // Action to perform when selection changes
                 print("Selected topic: \(newValue)")
-                if qRec.pub.updateMode(newMode: selection){
+                if changeable && qRec.pub.updateMode(newMode: selection){
                     displayIDs.pub.clearList()
                 }
             }
@@ -121,32 +121,35 @@ struct TopicMenu: View {
     }
 }
 
-class QuestionHistoryManager: ObservableObject{
-    static var pub = QuestionHistoryManager()
-    @Published var questionsList : [Question]
-    var IDCache : [Int : Question]
-    private init(){
-        questionsList = [Question]()
-        IDCache = [Int : Question]()
-    }
-    func addQuestion(q : Question){
-        questionsList.insert(q, at:0)
-        IDCache[q.id] = q
-    }
-}
+//class QuestionHistoryManager: ObservableObject{
+//    static var pub = QuestionHistoryManager()
+//    @Published var questionsList : [Question]
+//    var IDCache : [Int : Question]
+//    private init(){
+//        questionsList = [Question]()
+//        IDCache = [Int : Question]()
+//    }
+//    func addQuestion(q : Question){
+//        questionsList.insert(q, at:0)
+//        IDCache[q.id] = q
+//    }
+//}
 
 struct HistList: View {
     var body: some View{
         VStack {
             List{
-                ForEach(QuestionHistoryManager.pub.questionsList, id: \.self){x in
-                    NavigationLink (destination: InertQuestion(q: x))
+                ForEach(HistoryManager.shared.orderedHist.reversed(), id: \.self){x in
+                    NavigationLink (destination: ScrollView{QuestionMenuView(q: questionFactory.shared.getQuestion(id: x))})
                     {
-                        Text(x.question)
+                        Text(DataManager.shared.getQuestionN(n: x)["question"] as! String)
                     }
                 }
+                Text("End of History")
+                if HistoryManager.shared.orderedHist.count==0 {
+                    Text("Go answer some questions and they will appear in your history here")
+                }
             }
-            Text("End of Session History, view profile history in profile")
         }
     }
 }

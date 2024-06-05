@@ -33,6 +33,7 @@ struct QuestionMenuView: View, Identifiable {
                 //return here to adjust handling of different text sizes and lengths
                 
                 VStack {
+                    Text("Question id \(question.id)")
                     Text(question.question).font(.custom("texgyretermes-regular", size:25))
                         .multilineTextAlignment(.leading)
                     Spacer()
@@ -46,7 +47,7 @@ struct QuestionMenuView: View, Identifiable {
                 }
                 .padding(10)
                 if report {
-                    ReportMenu(questionID: question.id, notReported: notReported, exitAction: {report = false}, submitAction: {notReported = false})
+                    ReportMenu(question: question, exitAction: {report = false}, submitAction: {notReported = false})
                         .fixedSize()
                 }
                 if forSure {
@@ -156,9 +157,26 @@ struct Info: View {
 }
 
 struct LikeDislikeMenu: View {
-    @State var colorUP = Color.white
-    @State var colorDOWN = Color.white
+    @State var colorUP : Color
+    @State var colorDOWN : Color
     @ObservedObject var question: Question
+    
+    init(question: Question){
+        self.question = question
+        if let enjoyed = question.liked {
+            if enjoyed {
+                colorUP = Color("LightGreen")
+                colorDOWN = Color(.white)
+            } else {
+                colorUP = Color(.white)
+                colorDOWN = Color("LightRed")
+            }
+        } else {
+            colorUP = Color(.white)
+            colorDOWN = Color(.white)
+        }
+    }
+    
     var body: some View {
         HStack{
             Button(action: {question.like(); setColor() }) {

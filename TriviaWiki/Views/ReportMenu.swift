@@ -9,8 +9,7 @@ import SwiftUI
 import Combine
 
 struct ReportMenu: View {
-    let questionID: Int
-    let notReported : Bool
+    let question: Question
     @State var selection = "null"
     let exitAction : () -> Void
     let submitAction : () -> Void
@@ -64,7 +63,7 @@ struct ReportMenu: View {
                 )
             }
             else{
-                if notReported {
+                if question.reported==nil {
                     VStack{
                         Text("Report Question\n")
                             .font(.title)
@@ -81,7 +80,7 @@ struct ReportMenu: View {
                             
                             if response != actions[0]
                             {
-                                fbase.pub.reportQuestion(id: questionID, report: response + comment)
+                                question.report(comment: response + comment)
                                 submitted = true
                                 submitAction()
                             }
@@ -162,6 +161,6 @@ struct ReportMenu: View {
 }
 
 #Preview {
-    ReportMenu(questionID: 0, notReported: false, exitAction: {print("exitted")}, submitAction: {print("submitted")})
+    ReportMenu(question: Question(id1: 0), exitAction: {print("exited")}, submitAction: {print("submitted")})
 }
 
