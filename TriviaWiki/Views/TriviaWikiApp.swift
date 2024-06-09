@@ -27,6 +27,36 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
 }
 
+class Globals : ObservableObject {
+    static var shared = Globals()
+    @Published var loading : Bool
+    @Published var firstTime : Bool
+    @Published var showTutorial : Bool
+    @Published var BrowseLoadingText: String
+    private init(){
+        loading = true
+        firstTime = UserDefaultsManager.shared.isFirstLaunch
+        showTutorial = UserDefaultsManager.shared.isFirstLaunch
+        BrowseLoadingText = "Uh oh, it looks like we ran out of questions to show you. Please email me at youngjakecubes@g.ucla.edu so I can go upload some more."
+    }
+    
+    
+    func initialize(){
+        Task {
+            await self.initializeGlobals()
+        }
+    }
+    
+    @MainActor
+    func initializeGlobals() async{
+        _ = qRec.pub
+        _ = HistoryManager.shared
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.loading = false
+        }
+    }
+}
+
 
 @main
 struct TriviaWikiApp: App {

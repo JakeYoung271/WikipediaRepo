@@ -10,10 +10,10 @@ import Combine
 
 
 struct loadingView: View {
+    @ObservedObject var global = Globals.shared
     var body: some View {
-        Text("Questions are loading")
+        Text(global.BrowseLoadingText)
             .font(.title)
-        Text("If this message is not going away, check your internet connection or go to your profile tab to report an issue")
     }
 }
 
@@ -31,6 +31,29 @@ class displayIDs: ObservableObject {
 struct ContentView: View {
     @State var counter: Int
     @ObservedObject var disp : displayIDs
+    @ObservedObject var globals = Globals.shared
+    init(){
+        counter = 1
+        disp = displayIDs.pub
+    }
+    
+    var body: some View {
+        if globals.loading || globals.firstTime {
+            WelcomePage()
+                .onAppear{
+                    globals.initialize()
+                }
+        } else if globals.showTutorial {
+            InstructionsFile(finishAction: {globals.showTutorial = false})
+        } else {
+            Browse()
+        }
+    }
+}
+
+struct Browse: View {
+    @State var counter: Int
+    @ObservedObject var disp : displayIDs
     init(){
         counter = 1
         disp = displayIDs.pub
@@ -39,14 +62,15 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack (spacing:0){
-                topBarView(changeable: true)
+                //topBarView(changeable: true)
                     ScrollView {
                         LazyVStack {
                             ForEach(disp.IDList, id: \.self){x in
-                                QuestionMenuView(q: questionFactory.shared.getQuestion(id: x))
-                                Divider()
-                                    .frame(height:1)
-                                    .overlay(.gray)
+                                if x != -1 {
+                                    QuestionMenuView(q: questionFactory.shared.getQuestion(id: x))
+                                    Divider()
+                                        .frame(height:1)
+                                    .overlay(.gray)}
                             }
                             loadingView()
                                 .padding()
@@ -66,10 +90,10 @@ struct ContentView: View {
                         }
                 }
             }
+            .navigationTitle("Browse")
         }
     }
 }
-
 struct topBarView: View {
     let changeable : Bool
     var body: some View{
@@ -79,15 +103,13 @@ struct topBarView: View {
                     .frame(height:50)
                     .overlay(
                         HStack {
-                            Spacer()
+                            Spacer().frame(width:25)
                             Text("Browse")
                                 .font(.title2)
                             Spacer()
+                            Text("Category:")
                             TopicMenu(changeable: changeable)
-                            Spacer()
-                            NavigationLink(destination: HistList()) { Text("History")
-                            }
-                            Spacer()
+                            Spacer().frame(width:25)
 
                         }
                             .offset(y:-10),
@@ -103,37 +125,26 @@ struct TopicMenu: View {
     @State private var selection = "Random"
     let topics = ["Arts and Culture", "Science", "Humanities", "Random"]
     var body: some View{
-        VStack{
-            Picker("Select a Topic", selection: $selection){
-                ForEach(topics, id:\.self){ x in
-                    Text(x)
+        HStack {
+            Text("Category:")
+            VStack{
+                Picker("Select a Topic", selection: $selection){
+                    ForEach(topics, id:\.self){ x in
+                        Text(x)
+                        }
                     }
-                }
-            .pickerStyle(.menu)
-            .onReceive(Just(selection)) { newValue in
-                // Action to perform when selection changes
-                print("Selected topic: \(newValue)")
-                if changeable && qRec.pub.updateMode(newMode: selection){
-                    displayIDs.pub.clearList()
+                .pickerStyle(.menu)
+                .onReceive(Just(selection)) { newValue in
+                    // Action to perform when selection changes
+                    print("Selected topic: \(newValue)")
+                    if changeable && qRec.pub.updateMode(newMode: selection){
+                        displayIDs.pub.clearList()
+                    }
                 }
             }
         }
     }
 }
-
-//class QuestionHistoryManager: ObservableObject{
-//    static var pub = QuestionHistoryManager()
-//    @Published var questionsList : [Question]
-//    var IDCache : [Int : Question]
-//    private init(){
-//        questionsList = [Question]()
-//        IDCache = [Int : Question]()
-//    }
-//    func addQuestion(q : Question){
-//        questionsList.insert(q, at:0)
-//        IDCache[q.id] = q
-//    }
-//}
 
 struct HistList: View {
     var body: some View{

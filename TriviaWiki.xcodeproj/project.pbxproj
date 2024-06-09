@@ -17,6 +17,8 @@
 		D57033F92B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033F82B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift */; };
 		D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */; };
 		D591BA042C103C8A00A86CF3 /* InstructionsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D591BA032C103C8A00A86CF3 /* InstructionsFile.swift */; };
+		D591BA062C10F25600A86CF3 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D591BA052C10F25600A86CF3 /* WelcomePage.swift */; };
+		D591BA0B2C158C8300A86CF3 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D591BA0A2C158C8300A86CF3 /* ProfilePage.swift */; };
 		D59920D82C070C0E00572D12 /* AreYouSureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920D72C070C0E00572D12 /* AreYouSureView.swift */; };
 		D59920DA2C07E30800572D12 /* currRatings.json in Resources */ = {isa = PBXBuildFile; fileRef = D59920D92C07E30800572D12 /* currRatings.json */; };
 		D59920DC2C07E48A00572D12 /* dump0.json in Resources */ = {isa = PBXBuildFile; fileRef = D59920DB2C07E48A00572D12 /* dump0.json */; };
@@ -26,7 +28,6 @@
 		D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */; };
 		D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */; };
 		D5A7C9B92C059810000A2C52 /* WikipediaFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */; };
-		D5A7C9BD2C070290000A2C52 /* InertQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9BC2C070290000A2C52 /* InertQuestionView.swift */; };
 		D5ACFDC52BBBC7FD0055C8D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */; };
 		D5ACFDC92BBBC9E40055C8D3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDC82BBBC9E40055C8D3 /* FirebaseAnalytics */; };
 		D5ACFDCB2BBBC9E40055C8D3 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDCA2BBBC9E40055C8D3 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -91,6 +92,8 @@
 		D57033F82B9BDEA700C9D836 /* TriviaWikiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaWikiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerOptionView.swift; sourceTree = "<group>"; };
 		D591BA032C103C8A00A86CF3 /* InstructionsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsFile.swift; sourceTree = "<group>"; };
+		D591BA052C10F25600A86CF3 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
+		D591BA0A2C158C8300A86CF3 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		D59920D72C070C0E00572D12 /* AreYouSureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreYouSureView.swift; sourceTree = "<group>"; };
 		D59920D92C07E30800572D12 /* currRatings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currRatings.json; sourceTree = "<group>"; };
 		D59920DB2C07E48A00572D12 /* dump0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dump0.json; sourceTree = "<group>"; };
@@ -100,7 +103,6 @@
 		D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBottomMenuView.swift; sourceTree = "<group>"; };
 		D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticleThumbnailView.swift; sourceTree = "<group>"; };
 		D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WikipediaFrame.png; sourceTree = "<group>"; };
-		D5A7C9BC2C070290000A2C52 /* InertQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InertQuestionView.swift; sourceTree = "<group>"; };
 		D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5BD8D572BBC999E00D83117 /* QuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionModel.swift; path = ../../QuestionModel.swift; sourceTree = "<group>"; };
 		D5BD8D592BBC999E00D83117 /* WebBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowser.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */,
 				D59920DB2C07E48A00572D12 /* dump0.json */,
 				D59920D92C07E30800572D12 /* currRatings.json */,
+				D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */,
 				D59AC6A92BAA2F2900E3CD0E /* Views */,
 				D59AC6A82BAA2ED200E3CD0E /* Model */,
 				D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */,
@@ -219,6 +222,19 @@
 			path = TriviaWikiUITests;
 			sourceTree = "<group>";
 		};
+		D591BA092C158C1700A86CF3 /* QuestionElements */ = {
+			isa = PBXGroup;
+			children = (
+				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
+				D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */,
+				D59920D72C070C0E00572D12 /* AreYouSureView.swift */,
+				D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */,
+				D5BD8D592BBC999E00D83117 /* WebBrowser.swift */,
+				D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */,
+			);
+			path = QuestionElements;
+			sourceTree = "<group>";
+		};
 		D59AC6A82BAA2ED200E3CD0E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,16 +251,11 @@
 		D59AC6A92BAA2F2900E3CD0E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */,
-				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
+				D591BA092C158C1700A86CF3 /* QuestionElements */,
+				D591BA052C10F25600A86CF3 /* WelcomePage.swift */,
+				D591BA0A2C158C8300A86CF3 /* ProfilePage.swift */,
 				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
-				D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */,
-				D59920D72C070C0E00572D12 /* AreYouSureView.swift */,
 				D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */,
-				D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */,
-				D5BD8D592BBC999E00D83117 /* WebBrowser.swift */,
-				D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */,
-				D5A7C9BC2C070290000A2C52 /* InertQuestionView.swift */,
 				D591BA032C103C8A00A86CF3 /* InstructionsFile.swift */,
 			);
 			path = Views;
@@ -421,12 +432,13 @@
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
 				D59920DE2C08FEFB00572D12 /* JSONHandler.swift in Sources */,
 				D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */,
+				D591BA062C10F25600A86CF3 /* WelcomePage.swift in Sources */,
 				D591BA042C103C8A00A86CF3 /* InstructionsFile.swift in Sources */,
 				D59920E22C09A78A00572D12 /* HistoryManager.swift in Sources */,
 				D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */,
+				D591BA0B2C158C8300A86CF3 /* ProfilePage.swift in Sources */,
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D59920E02C0903AB00572D12 /* DataManager.swift in Sources */,
-				D5A7C9BD2C070290000A2C52 /* InertQuestionView.swift in Sources */,
 				D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */,
 				D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */,
 				D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */,

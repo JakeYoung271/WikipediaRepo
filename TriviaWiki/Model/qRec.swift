@@ -144,6 +144,7 @@ class qRec : ObservableObject {
             }
             if cIds[index].count==0{
                 print("cIds of \(index) is empty!!!")
+                Globals.shared.BrowseLoadingText = "You completed all the questions in the category \(genCats[index]), wow! Try playing another category until more questions are added into the database."
                 return -1
             }
             return getBestInCat(catIndex: index)
