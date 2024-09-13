@@ -10,6 +10,24 @@ import SwiftUI
 
 var example = Question()
 
+class QuestionFactory {
+    var questions : [Int: Question]
+    static var shared = QuestionFactory()
+    private init(){
+        questions = [Int:Question]()
+    }
+    func getQuestion(id: Int) -> Question{
+        if let foundQuestion = questions[id] {
+          return foundQuestion
+        } else {
+            let newQuestion = Question(id1: id)
+            questions[id] = newQuestion
+            return newQuestion
+            
+        }
+    }
+}
+
 class Question: ObservableObject, Hashable {
     static func == (lhs: Question, rhs: Question) -> Bool {
         ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
@@ -17,20 +35,20 @@ class Question: ObservableObject, Hashable {
     func hash(into hasher: inout Hasher){
         hasher.combine(ObjectIdentifier(self))
     }
-    
+    let ref = DataManager.shared
     let id: Int
     let link: String
     let question: String
     let options: [String]
     let responseNums: [Int]
     let correctIndex: Int
-    let subject: String
-    let difficulty: Int
     let topic : String
     let quote : String
-    @Published var selectedIndex: Int
     @Published var complete: Bool
-    @Published var clicks: Double
+    @Published var revealedHint: Bool
+    @Published var selectedIndex: Int?
+    @Published var liked: Bool?
+    @Published var report: String?
     
     init(){
         id = 0
@@ -38,96 +56,77 @@ class Question: ObservableObject, Hashable {
         question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
         options = ["Cockroach","Fly", "Termite", "Beatle"]
         correctIndex = 1
-        subject = "TestQuestion"
-        difficulty = 1
-        selectedIndex = 5
         complete = false
-        //timeOnScreen = 0.1
-        clicks = 0.0
+        revealedHint = false
         responseNums = [0,0,0,0]
         topic = "default"
         quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
     }
     
     init(id1 : Int){
-    if let cQuest = QuestionHistoryManager.pub.IDCache[id1]{
         id = id1
-        link = cQuest.link
-        question = cQuest.question
-        options = cQuest.options
-        correctIndex = cQuest.correctIndex
-        subject = cQuest.subject
-        difficulty = cQuest.difficulty
-        selectedIndex = cQuest.selectedIndex
-        complete = cQuest.complete
-        clicks = cQuest.clicks
-        responseNums = cQuest.responseNums
-        topic = cQuest.topic
-        quote = cQuest.quote
-        return
+        link = ref.getQuestion_link(id: id1)
+        question = ref.getQuestion_question(id: id1)
+        options = ref.getQuestion_options(id: id1)
+        correctIndex = ref.getQuestion_correctIndex(id: id1)
+        complete = ref.getQuestion_complete(id: id1)
+        revealedHint = ref.getQuestion_revealedHint(id: id1)
+        responseNums = ref.getQuestion_responseNums(id: id1)
+        topic = ref.getQuestion_topic(id: id1)
+        quote = ref.getQuestion_quote(id: id1)
+        selectedIndex = ref.getQuestion_selectedIndex(id: id1)
+        liked = ref.getQuestion_liked(id: id1)
+        report = ref.getQuestion_report(id: id1)
     }
-    let sResult = CoreDataStack.shared.fetchID(id:id1)
-    if sResult.count != 1 {
-        for i in sResult{
-            print(i.question)
-        }
-        print(sResult.count)
-        print("tried to initialize question with fetched ID, failed on question with id \(id1)")
-        id = id1
-        link =  "https://en.wikipedia.org/wiki/default"
-        question = "Failed to Generate Question with id \(id). Guess why the answer options are relevant. Hint (this question is a ..."
-        options = ["Cockroach","Fly", "Termite", "Beatle"]
-//        responseRates = [0.5,0.5,0.5,0.5]
-        correctIndex = 1
-        subject = "TestQuestion"
-        difficulty = 1
-        selectedIndex = 5
-        complete = false
-        //timeOnScreen = 0.1
-        clicks = 0.0
-        responseNums = [0,0,0,0]
-        topic = "default"
-        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
 
-    }
-    else{
-        let Qbody = sResult[0]
-        id = id1
-        link =  "https://en.wikipedia.org/wiki/" + (Qbody.topic!).replacingOccurrences(of: " ", with: "_")
-        question = Qbody.question!
-        options = Qbody.answers!
-        correctIndex = Int(Qbody.correct)
-        subject = Qbody.category!
-        difficulty = 0
-        selectedIndex = 5
-        complete = false
-        clicks = 0.0
-        responseNums = allResponses[id1]
-        topic = Qbody.topic!
-        quote = Qbody.quote!
-        }
-    }
-    
-    
-    init(id1: Int, topic: String, q: String, opts: [String], resps: [Int], corr: Int, cat: String, diff: Int){
-    id = id1
-    link =  "https://en.wikipedia.org/wiki/" + topic.replacingOccurrences(of: " ", with: "_")
-    question = q
-    options = opts
-    correctIndex = corr
-    subject = cat
-    difficulty = diff
-    selectedIndex = 5
-    complete = false
-    clicks = 0.0
-    responseNums = resps
-    self.topic = topic
-    quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
-    }
     func like() -> Void {
+        if liked == true {
+            liked = nil
+        } else {
+            liked = true }
+        ref.seeQuestion(id: id)
         return
     }
     func dislike() -> Void {
+        if liked == false {
+            liked = nil
+        } else {
+            liked = false }
+        ref.seeQuestion(id: id)
         return
+    }
+    func reportQuestion(reason: String) -> Void {
+        ref.seeQuestion(id: id)
+        report = reason
+    }
+    func selectAnswer(selection: Int) -> Void {
+        ref.seeQuestion(id: id)
+        selectedIndex = selection
+        complete = true
+        ref.applyRatingChange(q: self)
+    }
+    func reveal() -> Void {
+        ref.seeQuestion(id: id)
+        revealedHint = true
+        ref.applyRatingChange(q: self)
+    }
+    func completedCorrectly() -> Bool {
+        return (selectedIndex == correctIndex) && (!revealedHint)
+    }
+    func serializeData() -> [String: Any]{
+        var result = [String: Any]()
+        result["id"] = id
+        if let liked1 = liked {
+            result["liked"] = liked1
+        }
+        if let report1 = report {
+            result["report"] = report1
+        }
+        if let selected = selectedIndex {
+            result["selectedIndex"] = selected
+        }
+        result["complete"] = complete
+        result["revealedHint"] = revealedHint
+        return result
     }
 }

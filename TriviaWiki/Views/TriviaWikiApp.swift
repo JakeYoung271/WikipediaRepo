@@ -16,6 +16,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     Database.database().isPersistenceEnabled = true
     return true
   }
+    func applicationWillTerminate(_ application: UIApplication) {
+        DataManager.shared.saveSession()
+    }
 }
 
 

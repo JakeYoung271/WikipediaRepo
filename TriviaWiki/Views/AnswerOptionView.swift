@@ -28,14 +28,12 @@ struct QuestionAnswer: View, Identifiable {
         Button(action:{
             if inert {
                 question.complete.toggle()
-                question.selectedIndex = x
+                question.selectAnswer(selection: x)
             }
             else {
                 if question.complete == false {
                     question.complete = true
-                    question.selectedIndex = x
-                    qRec.pub.seeProblem(q: question)
-                    QuestionHistoryManager.pub.addQuestion(q: question)
+                    question.selectAnswer(selection: x)
                 }
             }
         }){
