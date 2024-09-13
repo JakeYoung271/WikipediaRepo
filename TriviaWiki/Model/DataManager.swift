@@ -118,12 +118,8 @@ class DataManager {
     var userQsCompleted : [Int]
     var toUpload : [[String: Any]]
     init(){
-        
-        //userRatings = [1200,1200,1200]
-        //userQsCompleted = [0,0,0]
         modifiedIDs = Set<Int>()
         seenSet = Set<Int>()
-        //seenIDs = [Int]()
         seenQuestions = [Int: Any]()
         questionsList = [[String: Any]]()
         responseNums = [[String:[Int]]]()
@@ -152,6 +148,16 @@ class DataManager {
         ratings = ratingsDict!["allRatings"] as! [Int]
         responseNums = ratingsDict!["allResponses"] as! [[String:[Int]]]
         
+        Task {
+            if (await fbase.pub.uploadUserHistory(History: toUpload)) {
+                clearToUpload()
+            }
+        }
+        
+    }
+    
+    func clearToUpload(){
+        toUpload.removeAll()
     }
     
     func saveSession(){
@@ -324,25 +330,5 @@ class DataManager {
     }
     func getUserRating(cat:Int)->Int{
         return userRatings[cat]
-    }
-    
-
-    
-    func updateRatings() async {
-//        var time = Int(NSDate().timeIntervalSince1970 - TIME_OFFSET)
-//        var lastUpdate = ratings["time"] as! Int
-//        if time - lastUpdate > 43200 {
-//            await fbase.pub.getRatingsDoc()
-//            ratings = readJSON(name: "currRatings")!
-//            dumps = ratings["dumps"] as! [Int]
-//            var counter = dumpsLoaded
-//            while counter < dumps.count {
-//                if await fbase.pub.getDumpDoc(name: "dump\(counter)"){
-//                    addDump(name:"dump\(counter)")
-//                } else {
-//                    print("ERROR: failed to get dump\(counter), will re-attempt on next refresh")
-//                }
-//            }
-//        }
     }
 }

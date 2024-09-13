@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-var example = Question()
-
 class QuestionFactory {
     var questions : [Int: Question]
     static var shared = QuestionFactory()

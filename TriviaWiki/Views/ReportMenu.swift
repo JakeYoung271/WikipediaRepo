@@ -160,8 +160,3 @@ struct ReportMenu: View {
         }
     }
 }
-
-//#Preview {
-////    ReportMenu(questionID: 0, notReported: false, exitAction: {print("exitted")}, submitAction: {print("submitted")})
-//}
-
