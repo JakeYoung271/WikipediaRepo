@@ -48,18 +48,18 @@ class Question: ObservableObject, Hashable {
     @Published var liked: Bool?
     @Published var report: String?
     
-    init(){
-        id = 0
-        link =  "https://en.wikipedia.org/wiki/default"
-        question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
-        options = ["Cockroach","Fly", "Termite", "Beatle"]
-        correctIndex = 1
-        complete = false
-        revealedHint = false
-        responseNums = [0,0,0,0]
-        topic = "default"
-        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
-    }
+//    init(){
+//        id = 0
+//        link =  "https://en.wikipedia.org/wiki/default"
+//        question = "This is the default question, if you are seeing this, there is a bug. Please report it in your profile"
+//        options = ["Cockroach","Fly", "Termite", "Beatle"]
+//        correctIndex = 1
+//        complete = false
+//        revealedHint = false
+//        responseNums = [0,0,0,0]
+//        topic = "default"
+//        quote = "In this example, defaultApp is the default Firebase app, and secondaryApp is another Firebase app connected to a different Firebase project. You can then use defaultDb and secondaryDb to interact with the respective Firestore databases."
+//    }
     
     init(id1 : Int){
         id = id1

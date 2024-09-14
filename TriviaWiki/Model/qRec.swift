@@ -10,7 +10,6 @@ import Foundation
 class qRec : ObservableObject {
     
     static let pub = qRec()
-    //let genCats = ["Science", "Social Studies", "Arts and Culture"]
     let ref = DataManager.shared
     var cIds : [[(Int,Int)]]
     var mode : String
@@ -28,16 +27,6 @@ class qRec : ObservableObject {
             return true
         }
         return false
-    }
-    
-    func generalCat(cat:String) ->Int{
-        let Sci = ["Medicine", "Mathematicians", "Economics", "Chemistry", "Mathematics", "Physics"]
-        let Hum = ["Political_Science", "Philosophy", "Ethics_&_Morality", "Activists", "Philosophers"]
-        let Art = ["Singers", "Famous_People", "Actors", "Playwrights", "Politicians", "Artists"]
-        if Sci.contains(cat){return 0}
-        if Hum.contains(cat){return 1}
-        if Art.contains(cat){return 2}
-        return -1
     }
     
     private func setupLists() {

@@ -56,7 +56,3 @@ struct WikiArticleThumbnailView: View {
         return result
     }
 }
-
-#Preview {
-    WikiArticleThumbnailView(question: Question())
-}

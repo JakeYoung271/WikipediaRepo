@@ -133,28 +133,9 @@ struct Article: View {
                                 Circle()
                                     .fill(.blue)
                                     .opacity(0.5)))}
-    }
+        }
     }
 }
-
-//struct Info: View {
-//    var body: some View{
-//        VStack {
-//            Button (action: {lightFeedback()}) {
-//                Image(systemName: "info")
-//                    .font(.title2)
-//                    .padding(18)
-//                    .background(
-//                        Circle()
-//                            .fill(.white)
-//                            .padding(8)
-//                            .background(
-//                                Circle()
-//                                    .fill(.blue)
-//                                    .opacity(0.5)))}
-//    }
-//    }
-//}
 
 struct LikeDislikeMenu: View {
     @State var colorUP = Color.white
@@ -191,8 +172,4 @@ struct LikeDislikeMenu: View {
             
         )
     }
-}
-
-#Preview {
-    QuestionMenuView(q:Question())
 }

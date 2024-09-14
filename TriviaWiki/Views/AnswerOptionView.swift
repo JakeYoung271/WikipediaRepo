@@ -94,9 +94,7 @@ class optionsWrapper: ObservableObject {
     @ObservedObject var mquestion : Question
     var optionsView: [QuestionAnswer]
     var inert : Bool
-//    var timer : Timer
     init(question:Question, inert: Bool){
-//        timer = Timer()
         mquestion = question
         optionsView = []
         self.inert = inert
