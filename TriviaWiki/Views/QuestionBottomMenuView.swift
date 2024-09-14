@@ -101,7 +101,7 @@ struct ReportButton: View {
     var reportAction : () -> Void
     var body: some View{
         VStack {
-            Button (action: reportAction) {
+            Button (action: {reportAction(); lightFeedback()}) {
                 Image(systemName: "exclamationmark.bubble")
                     .font(.title2)
                     .padding(18)
@@ -121,7 +121,7 @@ struct Article: View {
     var action : () -> Void
     var body: some View{
         VStack {
-            Button (action: action) {
+            Button (action: {action(); lightFeedback()}) {
                 Image(systemName: "newspaper")
                     .font(.title2)
                     .padding(18)
@@ -137,24 +137,24 @@ struct Article: View {
     }
 }
 
-struct Info: View {
-    var body: some View{
-        VStack {
-            Button (action: {}) {
-                Image(systemName: "info")
-                    .font(.title2)
-                    .padding(18)
-                    .background(
-                        Circle()
-                            .fill(.white)
-                            .padding(8)
-                            .background(
-                                Circle()
-                                    .fill(.blue)
-                                    .opacity(0.5)))}
-    }
-    }
-}
+//struct Info: View {
+//    var body: some View{
+//        VStack {
+//            Button (action: {lightFeedback()}) {
+//                Image(systemName: "info")
+//                    .font(.title2)
+//                    .padding(18)
+//                    .background(
+//                        Circle()
+//                            .fill(.white)
+//                            .padding(8)
+//                            .background(
+//                                Circle()
+//                                    .fill(.blue)
+//                                    .opacity(0.5)))}
+//    }
+//    }
+//}
 
 struct LikeDislikeMenu: View {
     @State var colorUP = Color.white
@@ -162,7 +162,7 @@ struct LikeDislikeMenu: View {
     @ObservedObject var question: Question
     var body: some View {
         HStack{
-            Button(action: {question.like()}) {
+            Button(action: {question.like(); lightFeedback()}) {
                 Image(systemName: "hand.thumbsup")
                     .font(.title3)
                     .foregroundColor(.black)
@@ -172,7 +172,7 @@ struct LikeDislikeMenu: View {
                             .fill((question.liked==true) ? Color("LightGreen"):Color.white))
                     .padding(10)
             }
-            Button(action: {question.dislike()}) {
+            Button(action: {question.dislike(); lightFeedback()}) {
                 Image(systemName: "hand.thumbsdown")
                     .font(.title3)
                     .foregroundColor(.black)

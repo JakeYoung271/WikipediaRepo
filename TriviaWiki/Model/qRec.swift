@@ -10,7 +10,7 @@ import Foundation
 class qRec : ObservableObject {
     
     static let pub = qRec()
-    let genCats = ["Science", "Humanities", "Arts and Culture"]
+    //let genCats = ["Science", "Social Studies", "Arts and Culture"]
     let ref = DataManager.shared
     var cIds : [[(Int,Int)]]
     var mode : String
@@ -134,7 +134,7 @@ class qRec : ObservableObject {
             switch (mode){
             case "Science":
                 index = 0
-            case "Humanities":
+            case "Social Studies":
                 index = 1
             case "Arts and Culture":
                 index = 2

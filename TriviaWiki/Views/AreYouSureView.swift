@@ -17,7 +17,7 @@ struct AreYouSureView: View {
                 .multilineTextAlignment(.center)
             HStack{
                 
-                Button(action:yes){
+                Button(action:{yes(); lightFeedback()}){
                     Text("Yes, show me")
                         .padding()
                         .foregroundStyle(.black)

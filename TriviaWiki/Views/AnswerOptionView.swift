@@ -32,6 +32,7 @@ struct QuestionAnswer: View, Identifiable {
             }
             else {
                 if question.complete == false {
+                    lightFeedback()
                     question.complete = true
                     question.selectAnswer(selection: x)
                 }

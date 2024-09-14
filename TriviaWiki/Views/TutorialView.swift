@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct TutorialView: View {
+    let tutorialImages = ["Slide1", "Slide2", "Slide3", "Slide4", "Slide5", "Slide6",]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack {
+                ForEach(tutorialImages, id: \.self) { imageName in
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                    Divider()
+                        .frame(height:5)
+                }
+            }
+        }
     }
 }
 

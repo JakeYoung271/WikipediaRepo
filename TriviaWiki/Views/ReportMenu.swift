@@ -30,7 +30,7 @@ struct ReportMenu: View {
                         .font(.title)
                         .multilineTextAlignment(.center)
                     Button(action:{
-                        exitAction()}){
+                        exitAction(); lightFeedback()}){
                             Text("exit")
                         }
                 }
@@ -46,7 +46,7 @@ struct ReportMenu: View {
                     VStack {
                         HStack {
                             Spacer()
-                            Button(action: exitAction) {
+                            Button(action: {exitAction(); lightFeedback()}) {
                                 Image(systemName: "x.circle")
                                     .font(.title)
                                     .foregroundColor(.black)
@@ -78,7 +78,7 @@ struct ReportMenu: View {
                         }
                         Button(action:{
                             print(response)
-                            
+                            lightFeedback()
                             if response != actions[0]
                             {
                                 question.reportQuestion(reason: response)
@@ -123,7 +123,7 @@ struct ReportMenu: View {
                         Text("Report Question \n")
                             .font(.title)
                         Text("Report recieved, thank you!\n")
-                        Button(action:{exitAction()}){
+                        Button(action:{exitAction(); lightFeedback()}){
                             Text("exit")
                         }
                     }
@@ -139,7 +139,7 @@ struct ReportMenu: View {
                         VStack {
                             HStack {
                                 Spacer()
-                                Button(action: exitAction) {
+                                Button(action: {exitAction(); lightFeedback()}) {
                                     Image(systemName: "x.circle")
                                         .font(.title)
                                         .foregroundColor(.black)

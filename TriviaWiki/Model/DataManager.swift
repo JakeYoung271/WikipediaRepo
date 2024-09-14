@@ -118,6 +118,7 @@ class DataManager {
     var userQsCompleted : [Int]
     var toUpload : [[String: Any]]
     init(){
+        print("Initializing Data Manager")
         modifiedIDs = Set<Int>()
         seenSet = Set<Int>()
         seenQuestions = [Int: Any]()

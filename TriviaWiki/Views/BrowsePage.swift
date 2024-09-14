@@ -31,16 +31,18 @@ class displayIDs: ObservableObject {
 struct BrowsePage: View {
     let qFactory = QuestionFactory.shared
     @State var counter: Int
+    @Binding var showHome : Bool
     @ObservedObject var disp : displayIDs
-    init(){
+    init(homeVar : Binding<Bool>){
         counter = 1
         disp = displayIDs.pub
+        self._showHome = homeVar
     }
     
     var body: some View {
         NavigationView {
             VStack (spacing:0){
-                topBarView()
+                topBarView(showHome: $showHome)
                     ScrollView {
                         LazyVStack {
                             ForEach(disp.IDList, id: \.self){x in
@@ -71,6 +73,7 @@ struct BrowsePage: View {
 }
 
 struct topBarView: View {
+    @Binding var showHome : Bool
     var body: some View{
             VStack (spacing:0){
                 Rectangle()
@@ -79,8 +82,10 @@ struct topBarView: View {
                     .overlay(
                         HStack {
                             Spacer()
-                            Text("Browse")
-                                .font(.title2)
+                            Button(action: {showHome.toggle()}) {
+                                Text("Home")
+                                    .font(.title2)
+                            }
                             Spacer()
                             TopicMenu()
                             Spacer()
@@ -99,7 +104,7 @@ struct topBarView: View {
 
 struct TopicMenu: View {
     @State private var selection = "Random"
-    let topics = ["Arts and Culture", "Science", "Humanities", "Random"]
+    let topics = ["Arts and Culture", "Science", "Social Studies", "Random"]
     var body: some View{
         VStack{
             Picker("Select a Topic", selection: $selection){
@@ -119,17 +124,6 @@ struct TopicMenu: View {
     }
 }
 
-//class QuestionHistoryManager: ObservableObject{
-//    static var pub = QuestionHistoryManager()
-//    @Published var questionsList : [Int]
-//    private init(){
-//        questionsList = [Int]()
-//    }
-//    func addQuestion(q : Question){
-//        questionsList.insert(q.id, at:0)
-//    }
-//}
-
 struct HistList: View {
     var body: some View{
         VStack {
@@ -141,7 +135,7 @@ struct HistList: View {
                     }
                 }
             }
-            Text("End of Session History, view profile history in profile")
+            Text("End of Question History")
         }
     }
 }

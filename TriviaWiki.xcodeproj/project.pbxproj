@@ -19,6 +19,8 @@
 		D59920D82C070C0E00572D12 /* AreYouSureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920D72C070C0E00572D12 /* AreYouSureView.swift */; };
 		D59920E02C0903AB00572D12 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59920DF2C0903AB00572D12 /* DataManager.swift */; };
 		D59AB6CC2C94059600765F98 /* BrowsePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59AB6CB2C94059600765F98 /* BrowsePage.swift */; };
+		D59AB6CE2C94E56200765F98 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59AB6CD2C94E56200765F98 /* TutorialView.swift */; };
+		D59AB6DD2C94F14000765F98 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59AB6DC2C94F14000765F98 /* HomePage.swift */; };
 		D59BA1FD2C85586A00B010D0 /* seen.json in Resources */ = {isa = PBXBuildFile; fileRef = D59BA1FC2C85586A00B010D0 /* seen.json */; };
 		D5A7C9B52C0559B0000A2C52 /* QuestionBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */; };
 		D5A7C9B72C0593F2000A2C52 /* WikiArticleThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */; };
@@ -91,6 +93,8 @@
 		D59920D72C070C0E00572D12 /* AreYouSureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreYouSureView.swift; sourceTree = "<group>"; };
 		D59920DF2C0903AB00572D12 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D59AB6CB2C94059600765F98 /* BrowsePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsePage.swift; sourceTree = "<group>"; };
+		D59AB6CD2C94E56200765F98 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		D59AB6DC2C94F14000765F98 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		D59BA1FC2C85586A00B010D0 /* seen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seen.json; sourceTree = "<group>"; };
 		D5A7C9B42C0559B0000A2C52 /* QuestionBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBottomMenuView.swift; sourceTree = "<group>"; };
 		D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticleThumbnailView.swift; sourceTree = "<group>"; };
@@ -232,7 +236,9 @@
 			children = (
 				D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */,
 				D570340B2B9BF2DC00C9D836 /* AnswerOptionView.swift */,
+				D59AB6CD2C94E56200765F98 /* TutorialView.swift */,
 				D59AB6CB2C94059600765F98 /* BrowsePage.swift */,
+				D59AB6DC2C94F14000765F98 /* HomePage.swift */,
 				D57033DD2B9BDEA500C9D836 /* ContentView.swift */,
 				D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */,
 				D59920D72C070C0E00572D12 /* AreYouSureView.swift */,
@@ -410,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D59AB6CE2C94E56200765F98 /* TutorialView.swift in Sources */,
 				D5BD8D5A2BBC999E00D83117 /* QuestionModel.swift in Sources */,
 				D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */,
 				D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */,
@@ -419,6 +426,7 @@
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D59920E02C0903AB00572D12 /* DataManager.swift in Sources */,
 				D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */,
+				D59AB6DD2C94F14000765F98 /* HomePage.swift in Sources */,
 				D59AB6CC2C94059600765F98 /* BrowsePage.swift in Sources */,
 				D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */,
 				D570340C2B9BF2DC00C9D836 /* AnswerOptionView.swift in Sources */,

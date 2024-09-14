@@ -7,15 +7,21 @@
 
 import SwiftUI
 
+func lightFeedback() {
+    let generator = UIImpactFeedbackGenerator(style: .light)
+    generator.impactOccurred()
+}
+
 struct ContentView: View {
     @State private var loadingCurrRatings = true
+    @State private var showHomePage = true
     
     var body: some View {
         ZStack{
-            if loadingCurrRatings {
-                Text("Currently Loading your app!")
+            if showHomePage {
+                HomePage(loading: $loadingCurrRatings, showHome: $showHomePage)
             } else {
-                BrowsePage()
+                BrowsePage(homeVar: $showHomePage)
             }
         }
         .onAppear{
