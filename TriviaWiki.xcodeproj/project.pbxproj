@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D5614CAB2B9D1BEE002D9EDE /* texgyretermes-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */; };
 		D56C8DE22C9A252600EF07BB /* dump0.json in Resources */ = {isa = PBXBuildFile; fileRef = D56C8DE12C9A252600EF07BB /* dump0.json */; };
+		D56C8DE42C9A283D00EF07BB /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C8DE32C9A283D00EF07BB /* QuestionModel.swift */; };
 		D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */; };
 		D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033DD2B9BDEA500C9D836 /* ContentView.swift */; };
 		D57033E02B9BDEA700C9D836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D57033DF2B9BDEA700C9D836 /* Assets.xcassets */; };
@@ -50,7 +51,6 @@
 		D5ACFDF12BBBC9E40055C8D3 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDF02BBBC9E40055C8D3 /* FirebaseRemoteConfigSwift */; };
 		D5ACFDF32BBBC9E40055C8D3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDF22BBBC9E40055C8D3 /* FirebaseStorage */; };
 		D5ACFDF52BBBC9E40055C8D3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D5ACFDF42BBBC9E40055C8D3 /* FirebaseStorageCombine-Community */; };
-		D5BD8D5A2BBC999E00D83117 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD8D572BBC999E00D83117 /* QuestionModel.swift */; };
 		D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD8D592BBC999E00D83117 /* WebBrowser.swift */; };
 		D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */; };
 		D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */; };
@@ -80,6 +80,7 @@
 		D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyretermes-regular.otf"; sourceTree = "<group>"; };
 		D5614CAC2B9D1C05002D9EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D56C8DE12C9A252600EF07BB /* dump0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dump0.json; sourceTree = "<group>"; };
+		D56C8DE32C9A283D00EF07BB /* QuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		D57033D82B9BDEA500C9D836 /* TriviaWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriviaWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaWikiApp.swift; sourceTree = "<group>"; };
 		D57033DD2B9BDEA500C9D836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		D5A7C9B62C0593F1000A2C52 /* WikiArticleThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticleThumbnailView.swift; sourceTree = "<group>"; };
 		D5A7C9B82C059810000A2C52 /* WikipediaFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WikipediaFrame.png; sourceTree = "<group>"; };
 		D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D5BD8D572BBC999E00D83117 /* QuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionModel.swift; path = ../../QuestionModel.swift; sourceTree = "<group>"; };
 		D5BD8D592BBC999E00D83117 /* WebBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowser.swift; sourceTree = "<group>"; };
 		D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHandler.swift; sourceTree = "<group>"; };
 		D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qRec.swift; sourceTree = "<group>"; };
@@ -224,8 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */,
+				D56C8DE32C9A283D00EF07BB /* QuestionModel.swift */,
 				D59920DF2C0903AB00572D12 /* DataManager.swift */,
-				D5BD8D572BBC999E00D83117 /* QuestionModel.swift */,
 				D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */,
 			);
 			path = Model;
@@ -417,7 +417,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D59AB6CE2C94E56200765F98 /* TutorialView.swift in Sources */,
-				D5BD8D5A2BBC999E00D83117 /* QuestionModel.swift in Sources */,
 				D5BD8D5C2BBC999E00D83117 /* WebBrowser.swift in Sources */,
 				D5BD8D602BBC9B9D00D83117 /* QueryHandler.swift in Sources */,
 				D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */,
@@ -426,6 +425,7 @@
 				D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */,
 				D59920E02C0903AB00572D12 /* DataManager.swift in Sources */,
 				D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */,
+				D56C8DE42C9A283D00EF07BB /* QuestionModel.swift in Sources */,
 				D59AB6DD2C94F14000765F98 /* HomePage.swift in Sources */,
 				D59AB6CC2C94059600765F98 /* BrowsePage.swift in Sources */,
 				D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */,
