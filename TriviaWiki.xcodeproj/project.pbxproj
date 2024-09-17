@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D5614CAB2B9D1BEE002D9EDE /* texgyretermes-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */; };
+		D56C8DE22C9A252600EF07BB /* dump0.json in Resources */ = {isa = PBXBuildFile; fileRef = D56C8DE12C9A252600EF07BB /* dump0.json */; };
 		D57033DC2B9BDEA500C9D836 /* TriviaWikiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */; };
 		D57033DE2B9BDEA500C9D836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57033DD2B9BDEA500C9D836 /* ContentView.swift */; };
 		D57033E02B9BDEA700C9D836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D57033DF2B9BDEA700C9D836 /* Assets.xcassets */; };
@@ -55,7 +56,6 @@
 		D5CA9ED62BC34B7D006EE2D3 /* qRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */; };
 		D5E044AC2BDED2F800A49CE0 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = D5E044AB2BDED2F800A49CE0 /* Popovers */; };
 		D5E044AE2BDEDC4000A49CE0 /* ReportMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */; };
-		D5E3EBEE2C843DE800FBD029 /* dump0.json in Resources */ = {isa = PBXBuildFile; fileRef = D5E3EBED2C843DE800FBD029 /* dump0.json */; };
 		D5E3EBF02C84E64600FBD029 /* currRatings.json in Resources */ = {isa = PBXBuildFile; fileRef = D5E3EBEF2C84E64600FBD029 /* currRatings.json */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +79,7 @@
 /* Begin PBXFileReference section */
 		D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyretermes-regular.otf"; sourceTree = "<group>"; };
 		D5614CAC2B9D1C05002D9EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D56C8DE12C9A252600EF07BB /* dump0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dump0.json; sourceTree = "<group>"; };
 		D57033D82B9BDEA500C9D836 /* TriviaWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriviaWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57033DB2B9BDEA500C9D836 /* TriviaWikiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaWikiApp.swift; sourceTree = "<group>"; };
 		D57033DD2B9BDEA500C9D836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		D5BD8D5F2BBC9B9D00D83117 /* QueryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHandler.swift; sourceTree = "<group>"; };
 		D5CA9ED52BC34B7D006EE2D3 /* qRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qRec.swift; sourceTree = "<group>"; };
 		D5E044AD2BDEDC4000A49CE0 /* ReportMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenu.swift; sourceTree = "<group>"; };
-		D5E3EBED2C843DE800FBD029 /* dump0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = dump0.json; path = ../../dump0.json; sourceTree = "<group>"; };
 		D5E3EBEF2C84E64600FBD029 /* currRatings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currRatings.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,8 +183,8 @@
 			children = (
 				D5ACFDC42BBBC7FD0055C8D3 /* GoogleService-Info.plist */,
 				D5E3EBEF2C84E64600FBD029 /* currRatings.json */,
+				D56C8DE12C9A252600EF07BB /* dump0.json */,
 				D59BA1FC2C85586A00B010D0 /* seen.json */,
-				D5E3EBED2C843DE800FBD029 /* dump0.json */,
 				D59AC6A92BAA2F2900E3CD0E /* Views */,
 				D59AC6A82BAA2ED200E3CD0E /* Model */,
 				D5614CAA2B9D1BEE002D9EDE /* texgyretermes-regular.otf */,
@@ -384,9 +384,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D56C8DE22C9A252600EF07BB /* dump0.json in Resources */,
 				D57033E32B9BDEA700C9D836 /* Preview Assets.xcassets in Resources */,
 				D5ACFDC52BBBC7FD0055C8D3 /* GoogleService-Info.plist in Resources */,
-				D5E3EBEE2C843DE800FBD029 /* dump0.json in Resources */,
 				D57033E02B9BDEA700C9D836 /* Assets.xcassets in Resources */,
 				D59BA1FD2C85586A00B010D0 /* seen.json in Resources */,
 				D5E3EBF02C84E64600FBD029 /* currRatings.json in Resources */,
@@ -603,19 +603,23 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = IdkYet.TriviaWiki;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngjakecubes.wikiquiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -636,19 +640,23 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = IdkYet.TriviaWiki;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngjakecubes.wikiquiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
